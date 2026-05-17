@@ -1,0 +1,45 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import NewsCard from "@components/ui/NewsCard.astro";
+import { getCollection } from "astro:content";
+import { useTranslations } from "@i18n/index";
+
+const lang = "en";
+const t = useTranslations(lang);
+const entries = await getCollection("news", (e) => !e.data.draft);
+const posts = entries.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+<BaseLayout
+  title={t.meta.newsTitle}
+  description={t.meta.newsDescription}
+  lang={lang}
+>
+  <div class="max-w-7xl mx-auto px-6 py-20">
+    <div class="mb-12">
+      <p class="text-orange-500 text-xs font-semibold uppercase tracking-widest mb-3">Club</p>
+      <h1 class="text-5xl md:text-6xl font-black text-white mb-4">{t.news.title}</h1>
+      <p class="text-zinc-400">{t.news.subtitle}</p>
+    </div>
+
+    {posts.length === 0 ? (
+      <p class="text-zinc-600 text-center py-20">{t.news.noNews}</p>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map((post) => (
+          <NewsCard
+            title={post.data.titleEn ?? post.data.title}
+            description={post.data.descriptionEn ?? post.data.description}
+            pubDate={post.data.pubDate}
+            author={post.data.author}
+            slug={post.id}
+            image={post.data.image}
+            lang={lang}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>

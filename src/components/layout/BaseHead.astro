@@ -1,0 +1,65 @@
+---
+import { getAlternateUrlMapped } from "@i18n/index";
+import type { Lang } from "@i18n/index";
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  lang,
+  image = "/og-image.jpg",
+  type = "website",
+  noindex = false,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const svUrl = new URL(getAlternateUrlMapped(Astro.url, "sv"), Astro.site);
+const enUrl = new URL(getAlternateUrlMapped(Astro.url, "en"), Astro.site);
+const ogImage = new URL(image, Astro.site);
+const htmlLang = lang === "en" ? "en" : "sv";
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<link rel="alternate" hreflang="sv" href={svUrl} />
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={svUrl} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:type" content={type} />
+<meta property="og:locale" content={lang === "en" ? "en_US" : "sv_SE"} />
+<meta property="og:locale:alternate" content={lang === "en" ? "sv_SE" : "en_US"} />
+<meta property="og:site_name" content="MRC Malmö" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+/>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />

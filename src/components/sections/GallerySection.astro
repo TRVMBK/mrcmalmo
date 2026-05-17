@@ -1,0 +1,49 @@
+---
+import type { Lang } from "@i18n/index";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+
+// Auto-detect images from src/assets/gallery/
+// Supported: jpg, jpeg, png, webp, avif
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/gallery/*.{jpg,jpeg,png,webp,avif}",
+  { eager: true }
+);
+
+const images = Object.values(imageModules).map((m) => m.default);
+---
+
+{images.length > 0 && (
+  <section class="py-24 bg-[#141414] border-t border-[#1e1e1e]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12">
+        <p class="text-orange-500 text-xs font-semibold uppercase tracking-widest mb-3">
+          {sv ? "Från löpspåret" : "From the track"}
+        </p>
+        <h2 class="text-4xl md:text-5xl font-black text-white">
+          {sv ? "Galleri" : "Gallery"}
+        </h2>
+      </div>
+
+      <div class="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+        {images.map((img) => (
+          <div class="break-inside-avoid overflow-hidden rounded-lg bg-[#1e1e1e]">
+            <img
+              src={img.src}
+              width={img.width}
+              height={img.height}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              class="w-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

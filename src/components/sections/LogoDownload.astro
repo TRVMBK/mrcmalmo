@@ -1,0 +1,158 @@
+---
+import type { Lang } from "@i18n/index";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+
+const logoTypes = [
+  {
+    id: "skyline",
+    nameSv: "Skyline",
+    nameEn: "Skyline",
+    descSv: "Malmös siluett med löpande figurer",
+    descEn: "Malmö skyline with running figures",
+  },
+  {
+    id: "henry-sally",
+    nameSv: "Henry & Sally",
+    nameEn: "Henry & Sally",
+    descSv: "De klassiska MRC-löparfigurerna",
+    descEn: "The classic MRC running figures",
+  },
+  {
+    id: "yin-yang",
+    nameSv: "Yin Yang",
+    nameEn: "Yin Yang",
+    descSv: "Balans mellan löpning och öl",
+    descEn: "Balance between running and beer",
+  },
+];
+
+const colors = [
+  { id: "white",  labelSv: "Vit",   labelEn: "White",  bg: "bg-[#111]",  border: "border-white/10" },
+  { id: "black",  labelSv: "Svart", labelEn: "Black",  bg: "bg-white",   border: "border-black/10" },
+  { id: "red",    labelSv: "Röd",   labelEn: "Red",    bg: "bg-[#111]",  border: "border-white/10" },
+  { id: "yellow", labelSv: "Gul",   labelEn: "Yellow", bg: "bg-[#111]",  border: "border-white/10" },
+];
+
+const formats = ["svg", "eps", "png", "webp"];
+
+function fileName(type: string, color: string) {
+  const map: Record<string, string> = {
+    "skyline": "Skyline",
+    "henry-sally": "Henry & Sally",
+    "yin-yang": "Yin Yang",
+  };
+  return `MRC - ${map[type]} - ${color}`;
+}
+---
+
+<div class="min-h-screen bg-[#0c0c0c] pt-24 pb-24">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Header -->
+    <div class="mb-16 text-center">
+      <span class="inline-block w-10 h-0.5 bg-[#F7DE10] mb-6"></span>
+      <h1 class="text-5xl md:text-6xl font-black text-white mb-4">
+        {sv ? "Logotyper" : "Logos"}
+      </h1>
+      <p class="text-white/50 max-w-lg mx-auto text-base leading-relaxed">
+        {sv
+          ? "Tre varianter i fyra färger. Välj den version som passar ditt sammanhang och ladda ner i önskat format."
+          : "Three variants in four colours. Choose the version that fits your context and download in your preferred format."}
+      </p>
+    </div>
+
+    <!-- One section per logo type -->
+    {logoTypes.map((type) => (
+      <div class="mb-20">
+        <!-- Section heading -->
+        <div class="flex items-baseline gap-4 mb-6 border-b border-white/8 pb-4">
+          <h2 class="text-2xl font-black text-white">{sv ? type.nameSv : type.nameEn}</h2>
+          <span class="text-white/35 text-sm">{sv ? type.descSv : type.descEn}</span>
+        </div>
+
+        <!-- 4 color cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {colors.map((color) => {
+            const base = fileName(type.id, color.id);
+            return (
+              <div class={`rounded-xl border ${color.border} overflow-hidden flex flex-col`}>
+
+                <!-- Preview area -->
+                <div class={`${color.bg} aspect-square flex items-center justify-center p-3`}>
+                  <img
+                    src={`/logos/${base}.svg`}
+                    alt={`MRC ${sv ? type.nameSv : type.nameEn} – ${sv ? color.labelSv : color.labelEn}`}
+                    class="w-full h-auto object-contain"
+                    loading="lazy"
+                  />
+                </div>
+
+                <!-- Color label + formats -->
+                <div class="bg-[#161616] p-4 flex flex-col gap-3 flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class={`w-3 h-3 rounded-full border border-white/20 ${
+                      color.id === "white"  ? "bg-white" :
+                      color.id === "black"  ? "bg-[#111]" :
+                      color.id === "red"    ? "bg-[#E23A23]" :
+                                             "bg-[#F7DE10]"
+                    }`}></span>
+                    <span class="text-white font-semibold text-sm">{sv ? color.labelSv : color.labelEn}</span>
+                  </div>
+
+                  <!-- Format buttons -->
+                  <div class="flex gap-1 flex-nowrap">
+                    {formats.map((fmt) => (
+                      <a
+                        href={`/logos/${base}.${fmt}`}
+                        download={`MRC-${type.id}-${color.id}.${fmt}`}
+                        class="flex items-center gap-0.5 text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded border border-white/12 text-white/55 hover:text-white hover:border-[#E23A23]/60 hover:bg-[#E23A23]/8 transition-all"
+                      >
+                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        {fmt}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    ))}
+
+    <!-- Download all -->
+    <div class="mt-8 pt-12 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <p class="text-white font-semibold">{sv ? "Ladda ner allt" : "Download everything"}</p>
+        <p class="text-white/40 text-sm mt-0.5">{sv ? "Alla logotyper, alla färger, alla format" : "All logos, all colours, all formats"}</p>
+      </div>
+      <a
+        href="/logos/mrc-malmo-logo-pack.zip"
+        download="mrc-malmo-logo-pack.zip"
+        class="inline-flex items-center gap-3 bg-[#E23A23] hover:bg-[#c0311c] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm whitespace-nowrap"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        {sv ? "Ladda ner ZIP" : "Download ZIP"}
+      </a>
+    </div>
+
+    <!-- Usage note -->
+    <div class="mt-10 bg-[#161616] border border-white/8 rounded-xl p-6 flex gap-4">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-[#F7DE10] shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <div>
+        <p class="text-white font-semibold text-sm mb-1">{sv ? "Användningsriktlinjer" : "Usage guidelines"}</p>
+        <p class="text-white/50 text-sm leading-relaxed">
+          {sv
+            ? "Logotyperna får användas i sammanhang relaterade till Mikkeller Running Club Malmö. Ändra inte färger eller proportioner. Denna sida är skapad av MRC Malmö-medlemmar och är inte en officiell Mikkeller-sida."
+            : "The logos may be used in contexts related to Mikkeller Running Club Malmö. Do not alter colours or proportions. This page is created by MRC Malmö members and is not an official Mikkeller page."}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>

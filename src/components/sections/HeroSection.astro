@@ -1,0 +1,95 @@
+---
+import { getLocalizedPath } from "@i18n/index";
+import type { Lang } from "@i18n/index";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+---
+
+<section class="relative min-h-[80vh] flex flex-col overflow-hidden">
+  <!-- Background photo — shifted up to crop sky, show runners -->
+  <div class="absolute inset-0 overflow-hidden">
+    <img
+      src="/images/hero2.jpg"
+      alt="MRC Malmø löpare"
+      class="absolute w-full"
+      style="top: -18%; height: 118%; object-fit: cover; object-position: center center;"
+      fetchpriority="high"
+    />
+    <!-- Strong gradient: very dark at bottom 40%, fade through middle -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0c0c0c] from-30% via-[#0c0c0c]/60 via-60% to-[#0c0c0c]/20 to-100%"></div>
+    <!-- Subtle red glow at very bottom -->
+    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#E23A23]/8 to-transparent"></div>
+  </div>
+
+  <!-- TOP: Skyline logo — sits in the clear photo area -->
+  <div class="relative z-10 flex justify-center pt-24 pb-8 pointer-events-none select-none">
+    <img
+      src="/logos/MRC - Skyline - white.svg"
+      alt="Mikkeller Running Club Malmø"
+      class="w-52 sm:w-64 md:w-72 opacity-95 drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]"
+      style="animation: var(--animate-fade-up)"
+    />
+  </div>
+
+  <!-- Spacer: pushes bottom content down -->
+  <div class="flex-1"></div>
+
+  <!-- BOTTOM: text content — sits on the dark gradient area -->
+  <div class="relative z-10 max-w-7xl mx-auto px-6 pb-16 w-full">
+    <span class="skane-bar mb-5 block" style="animation: var(--animate-fade-up-delay-1)"></span>
+
+    <h1
+      class="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] mb-5 max-w-2xl"
+      style="animation: var(--animate-fade-up-delay-2)"
+    >
+      {sv ? "Social löpning\ni Malmö" : "Social running\nin Malmö"}
+    </h1>
+
+    <p
+      class="text-base sm:text-lg text-white/75 mb-8 max-w-lg leading-relaxed"
+      style="animation: var(--animate-fade-up-delay-3)"
+    >
+      {sv
+        ? "Vi springer varje vecka och avslutar alltid med dryck och gemenskap. Alla välkomna – oavsett tempo."
+        : "We run every week and always finish with drinks and community. Everyone welcome – regardless of pace."}
+    </p>
+
+    <div class="flex flex-wrap gap-3" style="animation: var(--animate-fade-up-delay-4)">
+      <a
+        href="#gruppaktiviteter"
+        class="inline-flex items-center gap-2 bg-[#E23A23] hover:bg-[#c0311c] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm"
+      >
+        {sv ? "Se gruppaktiviteter" : "See group activities"}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a
+        href="https://www.facebook.com/mrcmalmo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 border border-white/40 hover:border-white/70 bg-white/5 hover:bg-white/10 text-white font-semibold px-6 py-3.5 rounded-lg transition-all text-sm"
+      >
+        {sv ? "Gå med på Facebook" : "Join on Facebook"}
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="mt-10 flex flex-wrap gap-6" style="animation: var(--animate-fade-up-delay-4)">
+      <div class="border-l-2 border-[#F7DE10] pl-4">
+        <div class="text-2xl font-black text-white">2018</div>
+        <div class="text-xs text-white/50 mt-0.5 uppercase tracking-wider">{sv ? "Grundat" : "Founded"}</div>
+      </div>
+      <div class="border-l-2 border-[#F7DE10] pl-4">
+        <div class="text-2xl font-black text-white">100+</div>
+        <div class="text-xs text-white/50 mt-0.5 uppercase tracking-wider">{sv ? "Aktiva löpare" : "Active runners"}</div>
+      </div>
+      <div class="border-l-2 border-[#F7DE10] pl-4">
+        <div class="text-2xl font-black text-white">{sv ? "Gratis" : "Free"}</div>
+        <div class="text-xs text-white/50 mt-0.5 uppercase tracking-wider">{sv ? "Alltid" : "Always"}</div>
+      </div>
+    </div>
+  </div>
+</section>

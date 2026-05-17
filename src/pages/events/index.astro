@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import EventCard from "@components/ui/EventCard.astro";
+import { getAllEvents } from "@lib/events";
+import { useTranslations } from "@i18n/index";
+
+const lang = "sv";
+const t = useTranslations(lang);
+const events = await getAllEvents();
+---
+
+<BaseLayout
+  title={t.meta.eventsTitle}
+  description={t.meta.eventsDescription}
+  lang={lang}
+>
+  <div class="max-w-7xl mx-auto px-6 py-20">
+    <div class="mb-12">
+      <p class="text-orange-500 text-xs font-semibold uppercase tracking-widest mb-3">
+        {lang === "sv" ? "Häng med" : "Join us"}
+      </p>
+      <h1 class="text-5xl md:text-6xl font-black text-white mb-4">{t.events.allEvents}</h1>
+      <p class="text-zinc-400 max-w-xl">{t.events.subtitle}</p>
+    </div>
+
+    {events.length === 0 ? (
+      <div class="text-center py-24 text-zinc-600">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4 opacity-40">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <p class="text-lg">{t.events.noEvents}</p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {events.map((event) => (
+          <EventCard event={event} lang={lang} />
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>

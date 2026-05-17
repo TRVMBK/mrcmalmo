@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  /* Skåne brand colors */
+  --color-red: #E23A23;
+  --color-red-dark: #c0311c;
+  --color-yellow: #F7DE10;
+  --color-yellow-dark: #d4bc00;
+
+  /* Surface */
+  --color-background: #0c0c0c;
+  --color-surface: #161616;
+  --color-surface-2: #202020;
+  --color-border: #2c2c2c;
+  --color-border-subtle: #1e1e1e;
+
+  /* Text */
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #a3a3a3;
+  --color-text-muted: #525252;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --radius-card: 0.75rem;
+  --radius-button: 0.375rem;
+
+  --animate-fade-up: fade-up 0.7s ease-out both;
+  --animate-fade-up-delay-1: fade-up 0.7s 0.12s ease-out both;
+  --animate-fade-up-delay-2: fade-up 0.7s 0.24s ease-out both;
+  --animate-fade-up-delay-3: fade-up 0.7s 0.36s ease-out both;
+  --animate-fade-up-delay-4: fade-up 0.7s 0.48s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes run {
+  0% {
+    transform: translateX(-120px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 120px));
+  }
+}
+
+.runner-animate {
+  animation: run 18s linear infinite;
+}
+
+html {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Utility: Skåne cross accent (yellow bar) */
+.skane-bar {
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #F7DE10;
+  border-radius: 2px;
+}

@@ -1,0 +1,152 @@
+---
+import type { Lang } from "@i18n/index";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+
+const faqSv = [
+  {
+    q: "Vad är social löpning?",
+    a: "Social löpning handlar om att göra löpning till en gemenskapsaktivitet snarare än en ensam sport. I MRC Malmö springer vi alltid i grupp, vi väntar på varandra och avslutar alltid tillsammans. Det sociala efteråt är lika viktigt som själva löpningen – här hittar du vänner för livet.",
+  },
+  {
+    q: "Hur snabbt springer ni?",
+    a: "Vi har oftast tre grupper: \"Ghost vision style\" runt 5:45/km, en mellannivå runt 6:00/km och \"Malmö i love you\" runt 6:30/km eller anpassat tempo. Alla grupper är välkomnande och inkluderande.",
+  },
+  {
+    q: "Kostar det något att springa med MRC Malmö?",
+    a: "All löpning med MRC Malmö är helt gratis. Det finns inga medlemsavgifter och inga dolda kostnader. Det enda du betalar är för din egen dryck efteråt om du stannar och umgås.",
+  },
+  {
+    q: "Måste jag dricka öl?",
+    a: "Nej, absolut inte. Drycken efteråt är helt självvald – öl, alkoholfritt, vatten eller vad du föredrar. Det viktiga är gemenskapen och att hänga kvar och umgås.",
+  },
+  {
+    q: "Vad är Köpenhamns-löpningarna?",
+    a: "Första lördagen varje månad åker vi till Warpigs i Köpenhamn och springer med moderklubben. Där finns 6–7 olika grupper med olika distanser och tempo. Bonus: första ölen är alltid gratis i Köpenhamn!",
+  },
+  {
+    q: "Vad betyder 'No one is left behind'?",
+    a: "Det betyder att du väljer en grupp och att vi håller gruppens tempo tillsammans – ingen lämnas kvar. Om du upplever att 6:30/km-gruppen känns för snabb rekommenderar vi att du testar Malmö Gerillalöpare på tisdagar, där de har en grupp med 7:00-tempo. Vi vill att alla ska hitta sin rätta nivå och ha kul.",
+  },
+];
+
+const faqEn = [
+  {
+    q: "What is social running?",
+    a: "Social running is about making running a community activity rather than a solitary sport. At MRC Malmö we always run as a group, we wait for each other and always finish together. The social part afterwards is just as important as the run itself – here you'll find friends for life.",
+  },
+  {
+    q: "How fast do you run?",
+    a: "We usually have three groups: \"Ghost vision style\" around 5:45/km, a mid-level group around 6:00/km, and \"Malmö i love you\" at around 6:30/km or an adapted pace. All groups are welcoming and inclusive.",
+  },
+  {
+    q: "Does it cost anything to run with MRC Malmö?",
+    a: "All running with MRC Malmö is completely free. There are no membership fees and no hidden costs. The only thing you pay for is your own drink afterwards if you stay and socialize.",
+  },
+  {
+    q: "Do I have to drink beer?",
+    a: "No, absolutely not. The drink afterwards is entirely your own choice – beer, non-alcoholic, water or whatever you prefer. What matters is the community and sticking around to socialize.",
+  },
+  {
+    q: "What are the Copenhagen runs?",
+    a: "The first Saturday of every month we head to Warpigs in Copenhagen and run with the mother club. There are 6–7 different groups with various distances and paces. Bonus: the first beer is always free in Copenhagen!",
+  },
+  {
+    q: "What does 'No one is left behind' mean?",
+    a: "It means you choose a group and we maintain that group's pace together – no one gets left behind. If the 6:30/km group feels too fast, we recommend trying Malmö Gerillalöpare on Tuesdays, where they have a group at 7:00/km pace. We want everyone to find their right level and have fun.",
+  },
+];
+
+const faqs = sv ? faqSv : faqEn;
+---
+
+<section class="py-24 bg-[#161616] border-t border-white/8">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+
+      <!-- SEO text block -->
+      <div class="lg:col-span-2">
+        <span class="skane-bar mb-5"></span>
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-6 leading-tight">
+          {sv
+            ? "Social löpning i Malmö med Mikkeller Running Club"
+            : "Social running in Malmö with Mikkeller Running Club"}
+        </h2>
+        <div class="space-y-4 text-white/60 text-sm leading-relaxed">
+          <p>
+            {sv
+              ? "MRC Malmö är den lokala grenen av Mikkeller Running Club – en global community som kombinerar löpglädje med social gemenskap. Vi träffas regelbundet för att springa tillsammans och sedan umgås."
+              : "MRC Malmö is the local chapter of Mikkeller Running Club – a global community that combines the joy of running with social togetherness. We meet regularly to run together and then socialize."}
+          </p>
+          <p>
+            {sv
+              ? "Vi springer året runt i Malmö – på sommaren från Mikkeller Moriskans Trädgård i Folkets Park både onsdagar och lördagar. På vintern är det Ramen to Bíiru på Möllevångstorget på onsdagar och Hylliebryggeriet på lördagar. Alla är välkomna oavsett tempo, erfarenhet eller ålder."
+              : "We run all year round in Malmö – in summer from Mikkeller Moriskan's Garden in Folkets Park on both Wednesdays and Saturdays. In winter it's Ramen to Bíiru at Möllevångstorget on Wednesdays and Hylliebryggeriet on Saturdays. Everyone is welcome regardless of pace, experience or age."}
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ accordion -->
+      <div class="lg:col-span-3">
+        <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-8">
+          {sv ? "Vanliga frågor" : "Frequently asked questions"}
+        </h3>
+        <div class="space-y-px" itemscope itemtype="https://schema.org/FAQPage">
+          {faqs.map((item, i) => (
+            <div
+              itemscope
+              itemprop="mainEntity"
+              itemtype="https://schema.org/Question"
+              class="border border-white/8 rounded-lg overflow-hidden"
+            >
+              <button
+                class="faq-btn w-full flex items-center justify-between gap-4 px-5 py-4 text-left bg-[#1a1a1a] hover:bg-[#1e1e1e] transition-colors group"
+                aria-expanded="false"
+                data-index={i}
+              >
+                <span itemprop="name" class="text-white/90 font-semibold text-sm group-hover:text-white transition-colors">
+                  {item.q}
+                </span>
+                <svg
+                  class="faq-icon shrink-0 text-[#E23A23] transition-transform duration-200"
+                  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                >
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+              <div
+                class="faq-answer hidden"
+                itemscope
+                itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer"
+              >
+                <p itemprop="text" class="px-5 py-4 text-white/60 text-sm leading-relaxed bg-[#161616] border-t border-white/6">
+                  {item.a}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll(".faq-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const icon = btn.querySelector(".faq-icon") as HTMLElement;
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+
+      btn.setAttribute("aria-expanded", String(!isOpen));
+      answer.classList.toggle("hidden", isOpen);
+      icon.style.transform = isOpen ? "" : "rotate(180deg)";
+    });
+  });
+</script>

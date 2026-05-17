@@ -1,0 +1,44 @@
+---
+import type { Lang } from "@i18n/index";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SportsClub",
+  "name": "Mikkeller Running Club Malmö",
+  "alternateName": ["MRC Malmö", "MRC Malmoe"],
+  "description": lang === "sv"
+    ? "Löparklubb i Malmö – Mikkeller Running Club Malmö träffas varje vecka för löpning och öl i Malmö."
+    : "Running club in Malmö – Mikkeller Running Club Malmö meets weekly for running and beer in Malmö.",
+  "url": "https://mrcmalmo.se",
+  "logo": "https://mrcmalmo.se/logos/mrc-malmo-logo-dark.svg",
+  "image": "https://mrcmalmo.se/og-image.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Malmö",
+    "addressRegion": "Skåne",
+    "addressCountry": "SE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 55.6050,
+    "longitude": 13.0038
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Malmö"
+  },
+  "sameAs": [
+    "https://www.facebook.com/groups/mrcmalmo",
+    "https://www.instagram.com/mrcmalmo",
+    "https://www.strava.com/clubs/mrcmalmo",
+    "https://mikkeller.com/mrc"
+  ],
+  "inLanguage": ["sv-SE", "en-US"],
+  "keywords": "löparklubb Malmö, running club Malmö, löpning Malmö, MRC Malmö, Mikkeller Running Club"
+})} />

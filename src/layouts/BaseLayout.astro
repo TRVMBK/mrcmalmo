@@ -1,0 +1,51 @@
+---
+import BaseHead from "@components/layout/BaseHead.astro";
+import Header from "@components/layout/Header.astro";
+import Footer from "@components/layout/Footer.astro";
+import StructuredData from "@components/seo/StructuredData.astro";
+import { getLangFromUrl } from "@i18n/index";
+import type { Lang } from "@i18n/index";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  lang?: Lang;
+}
+
+const {
+  title,
+  description,
+  image,
+  type,
+  noindex,
+  lang: langProp,
+} = Astro.props;
+
+const lang: Lang = langProp ?? getLangFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html lang={lang === "en" ? "en" : "sv"}>
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      lang={lang}
+      image={image}
+      type={type}
+      noindex={noindex}
+    />
+    <StructuredData lang={lang} />
+  </head>
+  <body class="bg-[#0a0a0a] text-zinc-50 font-sans antialiased">
+    <Header lang={lang} />
+    <main class="pt-16">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

@@ -1,0 +1,18 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import LogoDownload from "@components/sections/LogoDownload.astro";
+import { useTranslations } from "@i18n/index";
+
+const lang = "sv";
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t.meta.logoTitle}
+  description={t.meta.logoDescription}
+  lang={lang}
+>
+  <div class="pt-8">
+    <LogoDownload lang={lang} />
+  </div>
+</BaseLayout>

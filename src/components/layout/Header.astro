@@ -1,0 +1,86 @@
+---
+import { getAlternateUrlMapped, getLocalizedPath } from "@i18n/index";
+import type { Lang } from "@i18n/index";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+const altLang: Lang = lang === "sv" ? "en" : "sv";
+const altUrl = getAlternateUrlMapped(Astro.url, altLang);
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#0c0c0c]/85 backdrop-blur-md border-b border-white/6">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+
+    <!-- Wordmark -->
+    <a href={getLocalizedPath(lang, "/")} class="flex items-center gap-2 shrink-0 group">
+      <span class="text-[#E23A23] font-black text-sm tracking-tight">MRC</span>
+      <span class="hidden sm:block text-white/80 group-hover:text-white transition-colors font-medium text-sm whitespace-nowrap">
+        Mikkeller Running Club Malmø
+      </span>
+      <span class="sm:hidden text-white/70 font-semibold text-sm">Malmø</span>
+    </a>
+
+    <!-- Right side -->
+    <div class="flex items-center gap-3">
+      <a
+        href={getLocalizedPath(lang, "/logotyp")}
+        class="hidden sm:block text-sm text-white/50 hover:text-white/90 transition-colors font-medium"
+      >
+        {sv ? "Logotyp" : "Logo"}
+      </a>
+
+      <a
+        href={altUrl}
+        class="text-xs font-semibold text-white/40 hover:text-white/80 transition-colors uppercase tracking-widest px-2 py-1 border border-white/10 rounded hover:border-white/30"
+      >
+        {altLang === "en" ? "EN" : "SV"}
+      </a>
+
+      <a
+        href="https://www.facebook.com/mrcmalmo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 bg-[#E23A23] hover:bg-[#c0311c] text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
+      >
+        {sv ? "Gå med" : "Join us"}
+      </a>
+
+      <button
+        id="mobile-menu-btn"
+        class="sm:hidden p-1.5 text-white/50 hover:text-white transition-colors"
+        aria-label="Toggle menu"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <rect y="3" width="20" height="2" rx="1"/>
+          <rect y="9" width="20" height="2" rx="1"/>
+          <rect y="15" width="20" height="2" rx="1"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-white/8 bg-[#0c0c0c]">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3">
+      <a href={getLocalizedPath(lang, "/logotyp")} class="text-white/70 hover:text-white transition-colors font-medium py-1 text-sm">
+        {sv ? "Logotyp" : "Logo"}
+      </a>
+      <a
+        href="https://www.facebook.com/mrcmalmo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-[#E23A23] text-white text-sm font-bold px-4 py-2.5 rounded-lg text-center mt-1 hover:bg-[#c0311c] transition-colors"
+      >
+        {sv ? "Gå med på Facebook" : "Join on Facebook"}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  btn?.addEventListener("click", () => menu?.classList.toggle("hidden"));
+</script>

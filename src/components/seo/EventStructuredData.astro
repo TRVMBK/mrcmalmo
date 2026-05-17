@@ -1,0 +1,44 @@
+---
+interface Props {
+  event: {
+    title: string;
+    description: string;
+    date: Date;
+    endDate?: Date;
+    location: string;
+    image?: string;
+    url: string;
+  };
+}
+const { event } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": event.title,
+  "description": event.description,
+  "startDate": event.date.toISOString(),
+  ...(event.endDate ? { "endDate": event.endDate.toISOString() } : {}),
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "location": {
+    "@type": "Place",
+    "name": event.location,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Malmö",
+      "addressCountry": "SE"
+    }
+  },
+  "image": event.image
+    ? `https://mrcmalmo.se${event.image}`
+    : "https://mrcmalmo.se/og-image.jpg",
+  "organizer": {
+    "@type": "SportsClub",
+    "name": "Mikkeller Running Club Malmö",
+    "url": "https://mrcmalmo.se"
+  },
+  "url": `https://mrcmalmo.se${event.url}`,
+  "isAccessibleForFree": true
+})} />

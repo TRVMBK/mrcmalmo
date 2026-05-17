@@ -1,0 +1,123 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { useTranslations, getLocalizedPath } from "@i18n/index";
+
+const lang = "sv";
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t.meta.aboutTitle}
+  description={t.meta.aboutDescription}
+  lang={lang}
+>
+  <div class="max-w-7xl mx-auto px-6 py-20">
+    <!-- Hero -->
+    <div class="max-w-3xl mb-20">
+      <p class="text-orange-500 text-xs font-semibold uppercase tracking-widest mb-4">MRC Malmö</p>
+      <h1 class="text-5xl md:text-7xl font-black text-white leading-tight mb-6">
+        {t.about.title}
+      </h1>
+      <p class="text-xl text-zinc-400 leading-relaxed">{t.about.body}</p>
+    </div>
+
+    <!-- What is MRC -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+      <div class="bg-[#141414] border border-[#2a2a2a] rounded-xl p-8">
+        <h2 class="text-2xl font-black text-white mb-4">
+          {lang === "sv" ? "Vad är Mikkeller Running Club?" : "What is Mikkeller Running Club?"}
+        </h2>
+        <p class="text-zinc-400 leading-relaxed">
+          {lang === "sv"
+            ? "Mikkeller Running Club grundades av det danska bryggeriet Mikkeller och finns idag i över 100 städer världen över. Varje kapitel springer på sina egna tider och sina egna rutter, men alltid med samma filosofi: spring hårt, drick gott öl."
+            : "Mikkeller Running Club was founded by the Danish brewery Mikkeller and now exists in over 100 cities worldwide. Each chapter runs on its own times and its own routes, but always with the same philosophy: run hard, drink good beer."}
+        </p>
+      </div>
+
+      <div class="bg-[#141414] border border-[#2a2a2a] rounded-xl p-8">
+        <h2 class="text-2xl font-black text-white mb-4">
+          {lang === "sv" ? "MRC i Malmö" : "MRC in Malmö"}
+        </h2>
+        <p class="text-zinc-400 leading-relaxed">
+          {lang === "sv"
+            ? "Malmö-kapitlet har funnits sedan 2017 och är en av de aktiva MRC-gruppperna i Sverige. Vi springer varje vecka på olika platser runt om i Malmö – från Husie till Ribersborg, från Limhamn till Nyhamnen."
+            : "The Malmö chapter has existed since 2017 and is one of the active MRC groups in Sweden. We run every week at various locations around Malmö – from Husie to Ribersborg, from Limhamn to Nyhamnen."}
+        </p>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="mb-16">
+      <h2 class="text-3xl font-black text-white mb-8">
+        {lang === "sv" ? "Hur funkar det?" : "How does it work?"}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          {
+            step: "01",
+            sv: "Gå med i Facebook-gruppen",
+            en: "Join the Facebook group",
+            desc_sv: "Alla löpningar annonseras i vår officiella Facebook-grupp. Gå med för att se när och var nästa löpning är.",
+            desc_en: "All runs are announced in our official Facebook group. Join to see when and where the next run is.",
+            href: "https://www.facebook.com/mrcmalmo",
+          },
+          {
+            step: "02",
+            sv: "Möt upp vid starttiden",
+            en: "Show up at start time",
+            desc_sv: "Vi samlas alltid på utsatt tid. Ta med löparskor och glatt humör. Alla tempon välkomna.",
+            desc_en: "We always gather at the scheduled time. Bring running shoes and a good mood. All paces welcome.",
+            href: null,
+          },
+          {
+            step: "03",
+            sv: "Spring och drick öl",
+            en: "Run and drink beer",
+            desc_sv: "Efter löpningen firar vi med ett glas. Det är inte obligatoriskt, men det är roligare.",
+            desc_en: "After the run we celebrate with a glass. It's not mandatory, but it's more fun.",
+            href: null,
+          },
+        ].map((item) => (
+          <div class="bg-[#141414] border border-[#2a2a2a] rounded-xl p-6">
+            <div class="text-4xl font-black text-orange-500/30 mb-4">{item.step}</div>
+            <h3 class="font-bold text-white mb-2">{lang === "sv" ? item.sv : item.en}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+              {lang === "sv" ? item.desc_sv : item.desc_en}
+            </p>
+            {item.href && (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs font-semibold text-orange-500 hover:text-orange-400 transition-colors"
+              >
+                {lang === "sv" ? "Gå till Facebook →" : "Go to Facebook →"}
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center bg-[#141414] border border-[#2a2a2a] rounded-2xl p-12">
+      <h2 class="text-3xl font-black text-white mb-4">
+        {lang === "sv" ? "Redo att springa med oss?" : "Ready to run with us?"}
+      </h2>
+      <p class="text-zinc-400 mb-8">
+        {lang === "sv"
+          ? "Gå med i Facebook-gruppen och se när nästa löpning är."
+          : "Join the Facebook group and see when the next run is."}
+      </p>
+      <a
+        href="https://www.facebook.com/mrcmalmo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 text-white font-semibold px-8 py-4 rounded-xl transition-colors"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        {lang === "sv" ? "Gå med i gruppen" : "Join the group"}
+      </a>
+    </div>
+  </div>
+</BaseLayout>
