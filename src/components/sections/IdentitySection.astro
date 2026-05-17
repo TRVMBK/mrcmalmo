@@ -1,0 +1,58 @@
+---
+import { getLocalizedPath } from "@i18n/index";
+import type { Lang } from "@i18n/index";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+
+const logos = [
+  { file: "MRC - Skyline - white.svg",      alt: "Skyline" },
+  { file: "MRC - Henry & Sally - white.svg", alt: "Henry & Sally" },
+  { file: "MRC - Yin Yang - white.svg",      alt: "Yin Yang" },
+];
+---
+
+<section class="py-24 bg-[#0c0c0c] border-t border-white/8">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Text -->
+      <div>
+        <span class="skane-bar mb-5"></span>
+        <h2 class="text-4xl md:text-5xl font-black text-white leading-tight mb-5">
+          {sv ? "Märket som\nspringer med dig" : "The badge that\nruns with you"}
+        </h2>
+        <p class="text-white/55 text-base leading-relaxed mb-8 max-w-md">
+          {sv
+            ? "Tre logotyper, fyra färger, en gemenskap. Våra märken bär med sig allt MRC Malmö står för — löparglädje, ölkultur och en stad vi älskar. Ladda ner dem fritt för allt som hör klubben till."
+            : "Three logos, four colours, one community. Our badges carry everything MRC Malmö stands for — the joy of running, beer culture, and a city we love. Download them freely for anything club-related."}
+        </p>
+        <a
+          href={getLocalizedPath(lang, "/logotyp")}
+          class="inline-flex items-center gap-2 bg-[#E23A23] hover:bg-[#c0311c] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm"
+        >
+          {sv ? "Se alla logotyper" : "Browse all logos"}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Logo preview strip -->
+      <div class="grid grid-cols-3 gap-3">
+        {logos.map((logo) => (
+          <div class="bg-[#161616] border border-white/8 rounded-xl p-6 flex items-center justify-center aspect-square">
+            <img
+              src={`/logos/${logo.file}`}
+              alt={`MRC ${logo.alt}`}
+              class="w-full h-auto object-contain opacity-90"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>

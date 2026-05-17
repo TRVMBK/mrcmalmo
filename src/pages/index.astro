@@ -6,6 +6,7 @@ import TrainingSection from "@components/sections/TrainingSection.astro";
 import GallerySection from "@components/sections/GallerySection.astro";
 import SeoFaqSection from "@components/sections/SeoFaqSection.astro";
 import AboutSection from "@components/sections/AboutSection.astro";
+import IdentitySection from "@components/sections/IdentitySection.astro";
 import { useTranslations } from "@i18n/index";
 
 const lang = "sv";
@@ -23,4 +24,5 @@ const t = useTranslations(lang);
   <GallerySection lang={lang} />
   <SeoFaqSection lang={lang} />
   <AboutSection lang={lang} />
+  <IdentitySection lang={lang} />
 </BaseLayout>
