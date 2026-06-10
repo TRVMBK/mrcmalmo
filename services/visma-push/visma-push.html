@@ -18,31 +18,43 @@
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-<!-- ── Header ─────────────────────────────────────────────────── -->
+<!-- ── Header ──────────────────────────────────────────────────── -->
 <header class="bg-[#1e2d4a] text-white shadow-md">
-  <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-3">
-    <span class="text-2xl">📦</span>
-    <div>
-      <h1 class="text-lg font-bold leading-tight">Visma Push</h1>
-      <p class="text-xs text-blue-200">Automatiska beställningspåminnelser via Visma NXT</p>
+  <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">📦</span>
+      <div>
+        <h1 class="text-lg font-bold leading-tight">Visma Push</h1>
+        <p class="text-xs text-blue-200">Automatiska beställningspåminnelser via Visma NXT</p>
+      </div>
     </div>
+    <button onclick="runDemo()"
+      class="text-xs bg-white/10 hover:bg-white/20 border border-white/20 text-white px-3 py-1.5 rounded-lg transition-colors font-medium">
+      🎮 Kör demo
+    </button>
   </div>
 </header>
 
 <main class="max-w-4xl mx-auto px-6 py-8 space-y-6">
 
-  <!-- ── CORS warning ─────────────────────────────────────────── -->
+  <!-- ── CORS info ────────────────────────────────────────────── -->
   <div id="cors-warning" class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800 fade-in">
     <div class="flex gap-2 items-start">
-      <span class="text-lg leading-none">⚠️</span>
-      <div>
-        <p class="font-semibold mb-1">Kör Chrome utan CORS-begränsningar</p>
-        <p class="mb-2">Eftersom detta är en lokal HTML-fil blockerar browsern normalt API-anrop till Visma. Starta Chrome med:</p>
-        <code class="block bg-amber-100 rounded px-3 py-2 text-xs break-all">
-          chrome --disable-web-security --user-data-dir=/tmp/no-cors
-        </code>
-        <p class="mt-2 text-xs text-amber-700">Mac: <code>open -na "Google Chrome" --args --disable-web-security --user-data-dir=/tmp/no-cors</code></p>
-        <button onclick="document.getElementById('cors-warning').remove()" class="mt-2 text-xs underline text-amber-600">Dölj detta meddelande</button>
+      <span class="text-lg leading-none mt-0.5">⚠️</span>
+      <div class="flex-1">
+        <p class="font-semibold mb-1">Starta Chrome utan CORS-begränsningar för riktiga API-anrop</p>
+        <div class="grid sm:grid-cols-2 gap-2 mt-2">
+          <div>
+            <p class="text-xs font-medium text-amber-700 mb-1">Mac</p>
+            <code class="block bg-amber-100 rounded px-2 py-1.5 text-xs break-all">open -na "Google Chrome" --args --disable-web-security --user-data-dir=/tmp/no-cors</code>
+          </div>
+          <div>
+            <p class="text-xs font-medium text-amber-700 mb-1">Windows</p>
+            <code class="block bg-amber-100 rounded px-2 py-1.5 text-xs break-all">chrome.exe --disable-web-security --user-data-dir=C:\tmp\no-cors</code>
+          </div>
+        </div>
+        <p class="mt-2 text-xs text-amber-600">Prova gärna demoläget först — tryck "Kör demo" i övre högra hörnet.</p>
+        <button onclick="document.getElementById('cors-warning').remove()" class="mt-2 text-xs underline text-amber-600">Dölj</button>
       </div>
     </div>
   </div>
@@ -58,15 +70,26 @@
             <p class="text-xs text-gray-500" id="config-summary">Fyll i dina API-nycklar nedan</p>
           </div>
         </div>
-        <span class="text-gray-400 text-sm" id="config-arrow">▼</span>
+        <span class="text-gray-400 text-sm">▼</span>
       </div>
     </summary>
 
-    <div class="bg-white rounded-b-xl border border-t-0 border-gray-200 shadow-sm px-6 pb-6 pt-4 space-y-5">
+    <div class="bg-white rounded-b-xl border border-t-0 border-gray-200 shadow-sm px-6 pb-6 pt-4 space-y-6">
 
       <!-- Visma -->
       <div>
-        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Visma NXT API</p>
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Visma NXT API</p>
+          <a href="https://developer.visma.com" target="_blank" class="text-xs text-blue-600 hover:underline">Hämta credentials →</a>
+        </div>
+        <div class="bg-blue-50 border border-blue-100 rounded-lg px-4 py-3 text-xs text-blue-700 mb-4">
+          <p class="font-medium mb-1">Var hittar jag dessa uppgifter?</p>
+          <ol class="list-decimal list-inside space-y-0.5 text-blue-600">
+            <li>Logga in på <strong>developer.visma.com</strong> → My Applications → New application</li>
+            <li>Välj scope: <code class="bg-blue-100 px-1 rounded">vismanet:{tenant_id}:readwrite</code></li>
+            <li>Tenant ID syns i Visma NXT URL:en: <code class="bg-blue-100 px-1 rounded">…/company/<strong>GUID</strong>/…</code></li>
+          </ol>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <label class="block">
             <span class="text-sm text-gray-700 font-medium">Client ID</span>
@@ -88,11 +111,17 @@
 
       <!-- Email -->
       <div>
-        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">E-post (Resend)</p>
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">E-post (Resend) — valfritt</p>
+          <a href="https://resend.com" target="_blank" class="text-xs text-blue-600 hover:underline">Skapa gratis konto →</a>
+        </div>
+        <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-xs text-gray-600 mb-4">
+          Om du lämnar Resend-nyckeln tom visas mail-HTML:en i en förhandsgranskning som du kan kopiera. Perfekt för att testa!
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <label class="block sm:col-span-2">
-            <span class="text-sm text-gray-700 font-medium">Resend API Key</span>
-            <input id="resendKey" type="password" placeholder="re_••••••••••••••••••"
+            <span class="text-sm text-gray-700 font-medium">Resend API Key <span class="text-gray-400 font-normal">(valfri)</span></span>
+            <input id="resendKey" type="password" placeholder="re_•••••• — lämna tomt för förhandsgranskning"
               class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e2d4a]" />
           </label>
           <label class="block">
@@ -126,36 +155,40 @@
             <span class="text-sm text-gray-700 font-medium">Förseningsgräns (%)</span>
             <input id="threshold" type="number" value="30" min="5" max="200"
               class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e2d4a]" />
-            <p class="text-xs text-gray-400 mt-1">Skicka påminnelse när kunden är X% försenad. 30 = 30 dagar → påminnelse efter 39 d.</p>
+            <p class="text-xs text-gray-400 mt-1">30 = skicka påminnelse när kunden är 30% försenad (snitt 30d → påminnelse dag 39)</p>
           </label>
           <label class="block">
-            <span class="text-sm text-gray-700 font-medium">Analysperiod (månader)</span>
+            <span class="text-sm text-gray-700 font-medium">Analysperiod (månader bakåt)</span>
             <input id="lookback" type="number" value="6" min="1" max="24"
               class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e2d4a]" />
           </label>
         </div>
       </div>
 
-      <div class="flex gap-3">
+      <div class="flex gap-3 items-center">
         <button onclick="saveConfig()" class="bg-[#1e2d4a] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#162438] transition-colors">
           Spara konfiguration
         </button>
-        <span id="save-ok" class="hidden text-green-600 text-sm self-center">✓ Sparad i localStorage</span>
+        <span id="save-ok" class="hidden text-green-600 text-sm">✓ Sparad i localStorage</span>
       </div>
     </div>
   </details>
 
-  <!-- ── Run button ───────────────────────────────────────────── -->
+  <!-- ── Run controls ─────────────────────────────────────────── -->
   <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col sm:flex-row sm:items-center gap-4">
     <div class="flex-1">
       <p class="font-semibold text-gray-800">Kör analys</p>
       <p class="text-sm text-gray-500">Hämtar ordrar från Visma NXT och beräknar vilka kunder som borde ha beställt igen.</p>
     </div>
-    <div class="flex gap-3 items-center">
-      <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-        <input type="checkbox" id="dryRun" class="rounded border-gray-300" />
-        Testläge (skicka inga mail)
+    <div class="flex flex-wrap gap-3 items-center">
+      <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer select-none">
+        <input type="checkbox" id="dryRun" class="rounded border-gray-300 accent-[#1e2d4a]" />
+        Testläge
       </label>
+      <button onclick="runDemo()"
+        class="text-sm px-4 py-2.5 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors font-medium">
+        🎮 Demo
+      </button>
       <button id="run-btn" onclick="runAnalysis()"
         class="bg-[#1e2d4a] text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-[#162438] transition-colors flex items-center gap-2 whitespace-nowrap">
         ▶ Kör analys
@@ -165,26 +198,21 @@
 
   <!-- ── Results ──────────────────────────────────────────────── -->
   <div id="results" class="hidden space-y-4 fade-in">
-
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between flex-wrap gap-3">
       <h2 class="text-base font-bold text-gray-800" id="results-title">Resultat</h2>
       <button onclick="sendAll()" id="send-all-btn"
         class="hidden bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
         📬 Skicka alla påminnelser
       </button>
     </div>
-
-    <!-- Stats row -->
     <div class="grid grid-cols-3 gap-4" id="stats-row"></div>
-
-    <!-- Customer cards -->
     <div id="customer-cards" class="space-y-3"></div>
   </div>
 
   <!-- ── Log ─────────────────────────────────────────────────── -->
   <details id="log-section" class="hidden">
     <summary>
-      <div class="bg-gray-800 text-gray-300 rounded-xl px-4 py-3 text-sm font-mono flex items-center justify-between cursor-pointer hover:bg-gray-750 transition-colors">
+      <div class="bg-gray-800 text-gray-300 rounded-xl px-4 py-3 text-sm font-mono flex items-center justify-between cursor-pointer">
         <span>📋 Logg</span>
         <span class="text-xs text-gray-500">klicka för att visa/dölja</span>
       </div>
@@ -195,21 +223,33 @@
 </main>
 
 <!-- ── Email preview modal ──────────────────────────────────────── -->
-<div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4" onclick="if(event.target===this)closeModal()">
+<div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4"
+  onclick="if(event.target===this)closeModal()">
   <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col">
     <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
       <h3 class="font-bold text-gray-800" id="modal-title">Förhandsgranskning</h3>
-      <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-xl">✕</button>
+      <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-xl leading-none">✕</button>
     </div>
     <div class="flex-1 overflow-auto p-4">
-      <iframe id="modal-frame" class="w-full rounded border border-gray-200" style="height:480px;"></iframe>
+      <iframe id="modal-frame" class="w-full rounded border border-gray-200" style="height:440px;"></iframe>
     </div>
-    <div class="px-6 py-4 border-t border-gray-200 flex justify-between items-center gap-3">
+    <div class="px-6 py-4 border-t border-gray-200 flex flex-wrap justify-between items-center gap-3">
       <span class="text-sm text-gray-500" id="modal-email-to"></span>
-      <div class="flex gap-3">
-        <button onclick="closeModal()" class="text-sm px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">Stäng</button>
-        <button id="modal-send-btn" onclick="sendFromModal()" class="bg-[#1e2d4a] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#162438] transition-colors">
-          📬 Skicka mail
+      <div class="flex flex-wrap gap-2">
+        <button onclick="copyEmailHtml()"
+          class="text-sm px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors flex items-center gap-1.5">
+          📋 Kopiera HTML
+        </button>
+        <button onclick="openMailto()"
+          class="text-sm px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors flex items-center gap-1.5">
+          ✉️ Öppna i e-post
+        </button>
+        <button onclick="closeModal()" class="text-sm px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">
+          Stäng
+        </button>
+        <button id="modal-send-btn" onclick="sendFromModal()"
+          class="bg-[#1e2d4a] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#162438] transition-colors">
+          📬 Skicka via Resend
         </button>
       </div>
     </div>
@@ -218,10 +258,48 @@
 
 <script>
 // ────────────────────────────────────────────────────────────────
-// State
+// Demo data
 // ────────────────────────────────────────────────────────────────
-let analysisResults = [];
-let currentModalCustomer = null;
+const TODAY = new Date();
+
+function daysAgo(n) {
+  const d = new Date(TODAY);
+  d.setDate(d.getDate() - n);
+  return d;
+}
+
+const DEMO_ORDERS = [
+  // Almaza — beställer var 28:e dag, senast för 42 dagar sedan → försenad
+  { id:'SO-1001', date: daysAgo(42),  customerId:'10455', customerName:'Almaza',              orderTotal: 754, lines:[{ inventoryId:'403107', description:'Big Tom Bloody Mary Mix 24×150ml', quantity:1, extendedPrice:460 }] },
+  { id:'SO-1002', date: daysAgo(70),  customerId:'10455', customerName:'Almaza',              orderTotal: 510, lines:[{ inventoryId:'403107', description:'Big Tom Bloody Mary Mix 24×150ml', quantity:1, extendedPrice:460 }] },
+  { id:'SO-1003', date: daysAgo(98),  customerId:'10455', customerName:'Almaza',              orderTotal: 460, lines:[{ inventoryId:'403107', description:'Big Tom Bloody Mary Mix 24×150ml', quantity:1, extendedPrice:460 }] },
+  { id:'SO-1004', date: daysAgo(126), customerId:'10455', customerName:'Almaza',              orderTotal: 920, lines:[{ inventoryId:'403107', description:'Big Tom Bloody Mary Mix 24×150ml', quantity:2, extendedPrice:920 }] },
+
+  // Barkonsult Spain — beställer var 14:e dag, senast 18 dagar → försenad
+  { id:'SO-2001', date: daysAgo(18),  customerId:'10604', customerName:'Barkonsult Spain',    orderTotal: 380, lines:[{ inventoryId:'503460', description:'Noshikushi Picks 100mm 200pcs', quantity:4, extendedPrice:380 }] },
+  { id:'SO-2002', date: daysAgo(32),  customerId:'10604', customerName:'Barkonsult Spain',    orderTotal: 190, lines:[{ inventoryId:'503460', description:'Noshikushi Picks 100mm 200pcs', quantity:2, extendedPrice:190 }] },
+  { id:'SO-2003', date: daysAgo(46),  customerId:'10604', customerName:'Barkonsult Spain',    orderTotal: 285, lines:[{ inventoryId:'503460', description:'Noshikushi Picks 100mm 200pcs', quantity:3, extendedPrice:285 }] },
+  { id:'SO-2004', date: daysAgo(62),  customerId:'10604', customerName:'Barkonsult Spain',    orderTotal: 190, lines:[{ inventoryId:'503460', description:'Noshikushi Picks 100mm 200pcs', quantity:2, extendedPrice:190 }] },
+
+  // Naked Juicebar Väla — beställer var 21:a dag, senast 19 dagar → OK (ännu inte försenad)
+  { id:'SO-3001', date: daysAgo(19),  customerId:'11908', customerName:'Naked Juicebar Väla', orderTotal: 650, lines:[{ inventoryId:'601200', description:'Fever-Tree Tonic 24×200ml', quantity:5, extendedPrice:650 }] },
+  { id:'SO-3002', date: daysAgo(40),  customerId:'11908', customerName:'Naked Juicebar Väla', orderTotal: 650, lines:[{ inventoryId:'601200', description:'Fever-Tree Tonic 24×200ml', quantity:5, extendedPrice:650 }] },
+  { id:'SO-3003', date: daysAgo(61),  customerId:'11908', customerName:'Naked Juicebar Väla', orderTotal: 520, lines:[{ inventoryId:'601200', description:'Fever-Tree Tonic 24×200ml', quantity:4, extendedPrice:520 }] },
+  { id:'SO-3004', date: daysAgo(82),  customerId:'11908', customerName:'Naked Juicebar Väla', orderTotal: 650, lines:[{ inventoryId:'601200', description:'Fever-Tree Tonic 24×200ml', quantity:5, extendedPrice:650 }] },
+
+  // Systembolaget — beställer var 10:e dag, senast 15 dagar → försenad
+  { id:'SO-4001', date: daysAgo(15),  customerId:'10013', customerName:'Systembolaget',       orderTotal:2100, lines:[{ inventoryId:'700100', description:'Mikkeller Spontanale 24×330ml', quantity:10, extendedPrice:2100 }] },
+  { id:'SO-4002', date: daysAgo(25),  customerId:'10013', customerName:'Systembolaget',       orderTotal:2100, lines:[{ inventoryId:'700100', description:'Mikkeller Spontanale 24×330ml', quantity:10, extendedPrice:2100 }] },
+  { id:'SO-4003', date: daysAgo(35),  customerId:'10013', customerName:'Systembolaget',       orderTotal:2100, lines:[{ inventoryId:'700100', description:'Mikkeller Spontanale 24×330ml', quantity:10, extendedPrice:2100 }] },
+  { id:'SO-4004', date: daysAgo(45),  customerId:'10013', customerName:'Systembolaget',       orderTotal:4200, lines:[{ inventoryId:'700100', description:'Mikkeller Spontanale 24×330ml', quantity:20, extendedPrice:4200 }] },
+];
+
+const DEMO_EMAILS = new Map([
+  ['10455', { email:'marcus@almaza.se',         contactName:'Marcus' }],
+  ['10604', { email:'pedra@barkonsult.es',       contactName:'Pedra' }],
+  ['11908', { email:'anna@nakedjuicebar.se',     contactName:'Anna' }],
+  ['10013', { email:'inköp@systembolaget.se',    contactName:'Inköpsavdelningen' }],
+]);
 
 // ────────────────────────────────────────────────────────────────
 // Config persistence
@@ -252,13 +330,14 @@ function getConfig() {
     clientSecret: document.getElementById('clientSecret').value.trim(),
     tenantId:     document.getElementById('tenantId').value.trim(),
     resendKey:    document.getElementById('resendKey').value.trim(),
-    senderName:   document.getElementById('senderName').value.trim(),
-    senderEmail:  document.getElementById('senderEmail').value.trim(),
-    companyName:  document.getElementById('companyName').value.trim(),
+    senderName:   document.getElementById('senderName').value.trim() || 'Säljteamet',
+    senderEmail:  document.getElementById('senderEmail').value.trim() || 'no-reply@example.se',
+    companyName:  document.getElementById('companyName').value.trim() || 'Ditt Företag',
     orderUrl:     document.getElementById('orderUrl').value.trim() || 'https://example.se/bestall',
     threshold:    Number(document.getElementById('threshold').value) || 30,
     lookback:     Number(document.getElementById('lookback').value) || 6,
     dryRun:       document.getElementById('dryRun').checked,
+    hasResend:    !!document.getElementById('resendKey').value.trim(),
   };
 }
 
@@ -267,6 +346,7 @@ function updateConfigSummary() {
   const company = document.getElementById('companyName').value;
   const el = document.getElementById('config-summary');
   if (id && company) el.textContent = `${company} · ${id.slice(0,8)}…`;
+  else if (company) el.textContent = company;
   else el.textContent = 'Fyll i dina API-nycklar nedan';
 }
 
@@ -274,11 +354,10 @@ function updateConfigSummary() {
 // Logging
 // ────────────────────────────────────────────────────────────────
 function log(msg, type = 'info') {
-  const colors = { info: 'text-gray-300', ok: 'text-green-400', warn: 'text-yellow-400', err: 'text-red-400' };
-  const icons  = { info: '·', ok: '✓', warn: '⚠', err: '✗' };
-  const section = document.getElementById('log-section');
+  const colors = { info:'text-gray-300', ok:'text-green-400', warn:'text-yellow-400', err:'text-red-400' };
+  const icons  = { info:'·', ok:'✓', warn:'⚠', err:'✗' };
   const out = document.getElementById('log-output');
-  section.classList.remove('hidden');
+  document.getElementById('log-section').classList.remove('hidden');
   const line = document.createElement('div');
   line.className = `log-line ${colors[type]}`;
   line.textContent = `${icons[type]} ${msg}`;
@@ -286,9 +365,7 @@ function log(msg, type = 'info') {
   out.scrollTop = out.scrollHeight;
 }
 
-function clearLog() {
-  document.getElementById('log-output').innerHTML = '';
-}
+function clearLog() { document.getElementById('log-output').innerHTML = ''; }
 
 // ────────────────────────────────────────────────────────────────
 // Visma API
@@ -310,10 +387,7 @@ async function getToken(cfg) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body,
   });
-  if (!res.ok) {
-    const t = await res.text();
-    throw new Error(`Token-fel ${res.status}: ${t}`);
-  }
+  if (!res.ok) throw new Error(`Token-fel ${res.status}: ${await res.text()}`);
   const data = await res.json();
   _token = data.access_token;
   _tokenExpiry = Date.now() + data.expires_in * 1000;
@@ -326,7 +400,7 @@ async function gql(cfg, query) {
   const res = await fetch('https://integration.visma.net/API/controller/api/graphql', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type':  'application/json',
       'Authorization': `Bearer ${token}`,
       'ipp_company_id': cfg.tenantId,
     },
@@ -344,22 +418,16 @@ async function fetchAllOrders(cfg) {
   const since = new Date();
   since.setMonth(since.getMonth() - cfg.lookback);
   const sinceIso = since.toISOString().split('T')[0];
-
   const orders = [];
   let cursor = null;
   let page = 0;
-
   do {
     page++;
     log(`Hämtar ordrar sida ${page}…`);
-    const q = `{
+    const data = await gql(cfg, `{
       salesOrder(
-        first: 200
-        ${cursor ? `after: "${cursor}"` : ''}
-        where: {
-          date: { gte: "${sinceIso}" }
-          status_cancelled: { ne: true }
-        }
+        first: 200 ${cursor ? `after: "${cursor}"` : ''}
+        where: { date: { gte: "${sinceIso}" } status_cancelled: { ne: true } }
         orderBy: [{ date: DESC }]
       ) {
         pageInfo { hasNextPage endCursor }
@@ -367,38 +435,19 @@ async function fetchAllOrders(cfg) {
           id date
           customer { id name }
           totals { orderTotal }
-          orderLines {
-            inventory { id description }
-            description quantity extendedPrice
-          }
+          orderLines { inventory { id description } description quantity extendedPrice }
         }
       }
-    }`;
-    const data = await gql(cfg, q);
-    const page_data = data.salesOrder;
-    for (const o of page_data.items) {
+    }`);
+    const pg = data.salesOrder;
+    for (const o of pg.items) {
       const lines = o.orderLines
         .filter(l => !SKIP_IDS.has(l.inventory.id) && l.extendedPrice > 0)
-        .map(l => ({
-          inventoryId:   l.inventory.id,
-          description:   l.description || l.inventory.description,
-          quantity:      l.quantity,
-          extendedPrice: l.extendedPrice,
-        }));
-      if (lines.length > 0) {
-        orders.push({
-          id:           o.id,
-          date:         new Date(o.date),
-          customerId:   o.customer.id,
-          customerName: o.customer.name,
-          orderTotal:   o.totals.orderTotal,
-          lines,
-        });
-      }
+        .map(l => ({ inventoryId: l.inventory.id, description: l.description || l.inventory.description, quantity: l.quantity, extendedPrice: l.extendedPrice }));
+      if (lines.length) orders.push({ id: o.id, date: new Date(o.date), customerId: o.customer.id, customerName: o.customer.name, orderTotal: o.totals.orderTotal, lines });
     }
-    cursor = page_data.pageInfo.hasNextPage ? page_data.pageInfo.endCursor : null;
+    cursor = pg.pageInfo.hasNextPage ? pg.pageInfo.endCursor : null;
   } while (cursor);
-
   return orders;
 }
 
@@ -406,30 +455,17 @@ async function fetchEmails(cfg, customerIds) {
   if (!customerIds.length) return new Map();
   const idList = customerIds.map(id => `"${id}"`).join(', ');
   log(`Hämtar e-postadresser för ${customerIds.length} kunder…`);
-  const q = `{
-    customerInvoice(
-      first: 200
-      where: { customerId: { in: [${idList}] } }
-      orderBy: [{ documentDate: DESC }]
-    ) {
-      pageInfo { hasNextPage endCursor }
-      items {
-        customerId
-        invoiceContact { email businessName }
-        customer { id name }
-      }
-    }
-  }`;
   try {
-    const data = await gql(cfg, q);
+    const data = await gql(cfg, `{
+      customerInvoice(first: 200 where: { customerId: { in: [${idList}] } } orderBy: [{ documentDate: DESC }]) {
+        pageInfo { hasNextPage endCursor }
+        items { customerId invoiceContact { email businessName } customer { id name } }
+      }
+    }`);
     const map = new Map();
     for (const inv of data.customerInvoice.items) {
-      if (!map.has(inv.customerId)) {
-        map.set(inv.customerId, {
-          email:       inv.invoiceContact?.email || null,
-          contactName: inv.invoiceContact?.businessName || inv.customer.name,
-        });
-      }
+      if (!map.has(inv.customerId))
+        map.set(inv.customerId, { email: inv.invoiceContact?.email || null, contactName: inv.invoiceContact?.businessName || inv.customer.name });
     }
     return map;
   } catch (e) {
@@ -441,9 +477,7 @@ async function fetchEmails(cfg, customerIds) {
 // ────────────────────────────────────────────────────────────────
 // Analysis
 // ────────────────────────────────────────────────────────────────
-function daysBetween(a, b) {
-  return Math.round(Math.abs(a - b) / 86400000);
-}
+function daysBetween(a, b) { return Math.round(Math.abs(a - b) / 86400000); }
 
 function analyzeCustomers(orders, cfg) {
   const byCustomer = new Map();
@@ -452,51 +486,29 @@ function analyzeCustomers(orders, cfg) {
     list.push(o);
     byCustomer.set(o.customerId, list);
   }
-
   const today = new Date();
   const patterns = [];
-
   for (const [customerId, list] of byCustomer) {
     if (list.length < 2) continue;
     const sorted = [...list].sort((a,b) => b.date - a.date);
-
-    let totalInterval = 0;
-    for (let i = 0; i < sorted.length - 1; i++) {
-      totalInterval += daysBetween(sorted[i].date, sorted[i+1].date);
-    }
-    const avgInterval = Math.round(totalInterval / (sorted.length - 1));
+    let total = 0;
+    for (let i = 0; i < sorted.length - 1; i++) total += daysBetween(sorted[i].date, sorted[i+1].date);
+    const avgInterval = Math.round(total / (sorted.length - 1));
     if (avgInterval > 90) continue;
-
     const lastOrderDate = sorted[0].date;
     const daysSince = daysBetween(today, lastOrderDate);
-
     const productCounts = new Map();
-    for (const o of list) {
+    for (const o of list)
       for (const l of o.lines) {
-        const existing = productCounts.get(l.inventoryId);
-        if (existing) existing.count++;
-        else productCounts.set(l.inventoryId, { id: l.inventoryId, description: l.description, count: 1 });
+        const e = productCounts.get(l.inventoryId);
+        if (e) e.count++; else productCounts.set(l.inventoryId, { id: l.inventoryId, description: l.description, count: 1 });
       }
-    }
     const topProduct = [...productCounts.values()].sort((a,b) => b.count - a.count)[0];
     if (!topProduct) continue;
-
-    const threshold = avgInterval * (1 + cfg.threshold / 100);
-    const isOverdue = daysSince > threshold;
-
-    patterns.push({
-      customerId,
-      customerName: sorted[0].customerName,
-      avgInterval,
-      lastOrderDate,
-      daysSince,
-      topProduct,
-      isOverdue,
-      orderCount: list.length,
-    });
+    const isOverdue = daysSince > avgInterval * (1 + cfg.threshold / 100);
+    patterns.push({ customerId, customerName: sorted[0].customerName, avgInterval, lastOrderDate, daysSince, topProduct, isOverdue, orderCount: list.length });
   }
-
-  return patterns.sort((a,b) => b.daysSince - a.daysSince);
+  return patterns.sort((a,b) => { if (a.isOverdue !== b.isOverdue) return a.isOverdue ? -1 : 1; return b.daysSince - a.daysSince; });
 }
 
 // ────────────────────────────────────────────────────────────────
@@ -509,16 +521,13 @@ function intervalLabel(days) {
   if (days < 75) return 'ungefär varannan månad';
   return `ungefär var ${Math.round(days/30)} månad`;
 }
-
-function formatDate(date) {
-  return date.toLocaleDateString('sv-SE', { day:'numeric', month:'long', year:'numeric' });
-}
+function formatDate(date) { return date.toLocaleDateString('sv-SE', { day:'numeric', month:'long', year:'numeric' }); }
 
 function buildEmailHtml(pattern, contactName, cfg) {
   const cadence = intervalLabel(pattern.avgInterval);
   const lastDate = formatDate(pattern.lastOrderDate);
   return `<!DOCTYPE html>
-<html lang="sv"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/></head>
+<html lang="sv"><head><meta charset="UTF-8"/></head>
 <body style="margin:0;padding:0;background:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:32px 16px;">
 <tr><td align="center">
@@ -530,7 +539,7 @@ function buildEmailHtml(pattern, contactName, cfg) {
 <tr><td style="padding:32px 36px;">
   <p style="margin:0 0 20px;font-size:16px;color:#374151;line-height:1.6;">Hoppas att allt är bra med dig!</p>
   <p style="margin:0 0 20px;font-size:16px;color:#374151;line-height:1.6;">
-    Jag är lite nyfiken på att höra hur <strong>${pattern.topProduct.description}</strong> säljer i butiken?
+    Jag är lite nyfiken på att höra hur <strong>${pattern.topProduct.description}</strong> säljer?
     Ni brukar beställa <strong>${cadence}</strong> och det har nu gått
     <strong>${pattern.daysSince} dagar</strong> sedan er senaste beställning den ${lastDate} —
     är det kanske snart dags att fylla på hyllorna?
@@ -548,7 +557,6 @@ function buildEmailHtml(pattern, contactName, cfg) {
   <p style="margin:0;font-size:13px;color:#9ca3af;">${cfg.companyName} · B2B · ${cfg.senderEmail}</p>
 </td></tr>
 </table>
-<p style="margin:16px 0 0;font-size:11px;color:#9ca3af;text-align:center;">Du får detta mail för att du är en aktiv kund hos ${cfg.companyName}.</p>
 </td></tr></table>
 </body></html>`;
 }
@@ -563,28 +571,17 @@ function buildSubject(pattern) {
 // Send via Resend
 // ────────────────────────────────────────────────────────────────
 async function sendEmail(to, subject, html, cfg) {
-  if (cfg.dryRun) {
-    log(`[TESTLÄGE] Skulle skicka till ${to}: "${subject}"`, 'warn');
-    return;
+  if (!cfg.hasResend || cfg.dryRun) {
+    log(`[${cfg.dryRun ? 'TESTLÄGE' : 'INGEN RESEND-NYCKEL'}] Skulle skicka till ${to}: "${subject}"`, 'warn');
+    return 'preview';
   }
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${cfg.resendKey}`,
-    },
-    body: JSON.stringify({
-      from:     `${cfg.senderName} <${cfg.senderEmail}>`,
-      reply_to: cfg.senderEmail,
-      to,
-      subject,
-      html,
-    }),
+    headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${cfg.resendKey}` },
+    body: JSON.stringify({ from:`${cfg.senderName} <${cfg.senderEmail}>`, reply_to: cfg.senderEmail, to, subject, html }),
   });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || `HTTP ${res.status}`);
-  }
+  if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.message || `HTTP ${res.status}`); }
+  return 'sent';
 }
 
 // ────────────────────────────────────────────────────────────────
@@ -592,94 +589,85 @@ async function sendEmail(to, subject, html, cfg) {
 // ────────────────────────────────────────────────────────────────
 function renderStats(patterns) {
   const overdue = patterns.filter(p => p.isOverdue).length;
-  const total = patterns.length;
-  const avgDays = patterns.length
-    ? Math.round(patterns.reduce((s,p) => s + p.avgInterval, 0) / patterns.length)
-    : 0;
-
+  const avg = patterns.length ? Math.round(patterns.reduce((s,p) => s+p.avgInterval,0)/patterns.length) : 0;
   document.getElementById('stats-row').innerHTML = `
     <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-center">
-      <p class="text-3xl font-bold text-gray-800">${total}</p>
-      <p class="text-xs text-gray-500 mt-1">Kunder med regelbundna köp</p>
+      <p class="text-3xl font-bold text-gray-800">${patterns.length}</p>
+      <p class="text-xs text-gray-500 mt-1">Regelbundna kunder</p>
     </div>
     <div class="bg-red-50 rounded-xl border border-red-200 shadow-sm p-4 text-center">
       <p class="text-3xl font-bold text-red-600">${overdue}</p>
-      <p class="text-xs text-red-500 mt-1">Försenade kunder</p>
+      <p class="text-xs text-red-500 mt-1">Försenade</p>
     </div>
     <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-center">
-      <p class="text-3xl font-bold text-gray-800">${avgDays}</p>
-      <p class="text-xs text-gray-500 mt-1">Snitt dagar mellan ordrar</p>
-    </div>
-  `;
+      <p class="text-3xl font-bold text-gray-800">${avg}</p>
+      <p class="text-xs text-gray-500 mt-1">Snitt dagar/order</p>
+    </div>`;
 }
 
-function renderCustomerCards(patterns, emailMap) {
+function renderCustomerCards(patterns, emailMap, cfg) {
   const container = document.getElementById('customer-cards');
   container.innerHTML = '';
-
-  const sorted = [...patterns].sort((a,b) => {
-    if (a.isOverdue !== b.isOverdue) return a.isOverdue ? -1 : 1;
-    return b.daysSince - a.daysSince;
-  });
-
-  for (const p of sorted) {
+  for (const p of patterns) {
     const contact = emailMap.get(p.customerId);
     const email = contact?.email || null;
     const contactName = contact?.contactName || p.customerName;
-    const overdueClass = p.isOverdue ? 'border-red-200 bg-red-50' : 'border-gray-200 bg-white';
+    const overdueDays = p.isOverdue ? Math.round(p.daysSince - p.avgInterval) : 0;
     const badge = p.isOverdue
       ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Försenad</span>'
       : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">I tid</span>';
     const emailBadge = email
       ? `<span class="text-xs text-gray-400">${email}</span>`
       : `<span class="text-xs text-amber-500">⚠ Ingen e-post</span>`;
-    const overdueDays = p.isOverdue ? Math.round(p.daysSince - p.avgInterval) : 0;
+
+    let sendBtn = '';
+    if (p.isOverdue && email) {
+      const label = (!cfg.hasResend || cfg.dryRun) ? '👁 Förhandsgranska' : '📬 Skicka';
+      sendBtn = `<button id="send-btn-${p.customerId}" onclick="sendOne('${p.customerId}')"
+        class="text-sm px-3 py-1.5 rounded-lg bg-[#1e2d4a] text-white hover:bg-[#162438] transition-colors font-medium">${label}</button>`;
+    }
 
     const card = document.createElement('div');
-    card.className = `rounded-xl border ${overdueClass} shadow-sm p-4 fade-in`;
+    card.className = `rounded-xl border ${p.isOverdue ? 'border-red-200 bg-red-50' : 'border-gray-200 bg-white'} shadow-sm p-4 fade-in`;
     card.id = `card-${p.customerId}`;
     card.innerHTML = `
       <div class="flex items-start gap-4">
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-2 flex-wrap mb-1">
-            <span class="font-semibold text-gray-800">${p.customerName}</span>
-            ${badge}
+            <span class="font-semibold text-gray-800">${p.customerName}</span>${badge}
           </div>
-          <div class="flex items-center gap-3 flex-wrap text-sm text-gray-600 mb-2">
+          <div class="flex items-center gap-2 flex-wrap text-sm text-gray-600 mb-2">
             ${emailBadge}
-            <span>·</span>
-            <span>Sist beställt: <strong>${formatDate(p.lastOrderDate)}</strong> (${p.daysSince} dagar sedan)</span>
-            <span>·</span>
+            <span class="text-gray-300">·</span>
+            <span>Sist: <strong>${formatDate(p.lastOrderDate)}</strong> (${p.daysSince} d sedan)</span>
+            <span class="text-gray-300">·</span>
             <span>Snitt: var ${p.avgInterval} d</span>
-            ${p.isOverdue ? `<span>·</span><span class="text-red-600 font-medium">${overdueDays} d försenad</span>` : ''}
+            ${p.isOverdue ? `<span class="text-gray-300">·</span><span class="text-red-600 font-medium">${overdueDays} d försenad</span>` : ''}
           </div>
-          <p class="text-xs text-gray-500">Toppprodukt: ${p.topProduct.description} (beställd ${p.topProduct.count}×)</p>
+          <p class="text-xs text-gray-500">Toppprodukt: ${p.topProduct.description} (beställd ${p.topProduct.count}×, ${p.orderCount} ordrar totalt)</p>
         </div>
         <div class="flex gap-2 shrink-0">
           <button onclick="previewEmail('${p.customerId}')"
             class="text-sm px-3 py-1.5 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">
             👁 Förhandsgranska
           </button>
-          ${p.isOverdue && email ? `
-          <button id="send-btn-${p.customerId}" onclick="sendOne('${p.customerId}')"
-            class="text-sm px-3 py-1.5 rounded-lg bg-[#1e2d4a] text-white hover:bg-[#162438] transition-colors font-medium">
-            📬 Skicka
-          </button>` : ''}
+          ${sendBtn}
         </div>
       </div>
-      <div id="status-${p.customerId}" class="hidden mt-2 text-sm"></div>
-    `;
+      <div id="status-${p.customerId}" class="hidden mt-2 text-sm"></div>`;
     container.appendChild(card);
   }
 }
 
-function showSendAllButton(patterns, emailMap) {
-  const overdue = patterns.filter(p => p.isOverdue && emailMap.get(p.customerId)?.email);
+function showSendAllBtn(patterns, emailMap, cfg) {
+  const targets = patterns.filter(p => p.isOverdue && emailMap.get(p.customerId)?.email);
   const btn = document.getElementById('send-all-btn');
-  if (overdue.length > 0) {
-    btn.classList.remove('hidden');
-    btn.textContent = `📬 Skicka alla ${overdue.length} påminnelser`;
-  }
+  if (!targets.length) return;
+  btn.classList.remove('hidden');
+  const label = (!cfg.hasResend || cfg.dryRun)
+    ? `👁 Förhandsgranska alla ${targets.length}`
+    : `📬 Skicka alla ${targets.length} påminnelser`;
+  btn.textContent = label;
 }
 
 // ────────────────────────────────────────────────────────────────
@@ -688,47 +676,29 @@ function showSendAllButton(patterns, emailMap) {
 async function runAnalysis() {
   const cfg = getConfig();
   if (!cfg.clientId || !cfg.clientSecret || !cfg.tenantId) {
-    alert('Fyll i Visma API-uppgifterna i konfigurationen först.');
+    alert('Fyll i Visma API-uppgifterna (Client ID, Secret och Tenant ID) i konfigurationen.\n\nVill du testa utan riktiga uppgifter? Klicka på "Demo"-knappen!');
     return;
   }
-
   clearLog();
   document.getElementById('results').classList.add('hidden');
-  document.getElementById('log-section').classList.remove('hidden');
   const btn = document.getElementById('run-btn');
   btn.innerHTML = '<span class="spinner"></span> Kör…';
   btn.disabled = true;
-  analysisResults = [];
-
   try {
-    log(`Hämtar ordrar från de senaste ${cfg.lookback} månaderna…`);
+    log(`Analysperiod: ${cfg.lookback} månader bakåt · förseningsgräns: ${cfg.threshold}%`);
     const orders = await fetchAllOrders(cfg);
-    log(`${orders.length} ordrar hittades med produktrader`, 'ok');
-
-    log('Analyserar köpmönster…');
+    log(`${orders.length} ordrar med produktrader`, 'ok');
     const patterns = analyzeCustomers(orders, cfg);
     const overdue = patterns.filter(p => p.isOverdue);
-    log(`${patterns.length} kunder med regelbundna köp`, 'ok');
-    log(`${overdue.length} kunder är försenade`, overdue.length > 0 ? 'warn' : 'ok');
-
-    const overdueIds = overdue.map(p => p.customerId);
-    const emailMap = await fetchEmails(cfg, overdueIds);
-    analysisResults = { patterns, emailMap, cfg };
-
-    renderStats(patterns);
-    renderCustomerCards(patterns, emailMap);
-    showSendAllButton(patterns, emailMap);
-
-    document.getElementById('results').classList.remove('hidden');
-    document.getElementById('results-title').textContent =
-      `Resultat — ${overdue.length} kunder behöver påminnelse`;
-
-    log('Analys klar!', 'ok');
+    log(`${patterns.length} regelbundna kunder · ${overdue.length} försenade`, overdue.length > 0 ? 'warn' : 'ok');
+    const emailMap = await fetchEmails(cfg, overdue.map(p => p.customerId));
+    showResults(patterns, emailMap, cfg);
+    log('Klart!', 'ok');
     document.getElementById('config-section').removeAttribute('open');
   } catch (err) {
     log(`FEL: ${err.message}`, 'err');
-    if (err.message.includes('Failed to fetch') || err.message.includes('CORS')) {
-      log('Tips: Starta Chrome med --disable-web-security (se varningen längst upp)', 'warn');
+    if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+      log('Tips: Starta Chrome med --disable-web-security (se guiden längst upp)', 'warn');
     }
   } finally {
     btn.innerHTML = '▶ Kör analys';
@@ -736,12 +706,45 @@ async function runAnalysis() {
   }
 }
 
+function runDemo() {
+  clearLog();
+  document.getElementById('results').classList.add('hidden');
+  log('Kör demoläge med exempeldata…', 'info');
+  const cfg = getConfig();
+  cfg.hasResend = !!cfg.resendKey;
+  const patterns = analyzeCustomers(DEMO_ORDERS, cfg);
+  log(`${patterns.length} kunder analyserade · ${patterns.filter(p=>p.isOverdue).length} försenade`, 'ok');
+  showResults(patterns, DEMO_EMAILS, cfg);
+  log('Demo klart! Prova att förhandsgranska ett mail.', 'ok');
+  document.getElementById('config-section').removeAttribute('open');
+}
+
+function showResults(patterns, emailMap, cfg) {
+  renderStats(patterns);
+  renderCustomerCards(patterns, emailMap, cfg);
+  showSendAllBtn(patterns, emailMap, cfg);
+  _currentResults = { patterns, emailMap, cfg };
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('results-title').textContent =
+    `Resultat — ${patterns.filter(p=>p.isOverdue).length} kunder behöver påminnelse`;
+}
+
+let _currentResults = null;
+let _currentModalId = null;
+let _currentModalHtml = '';
+let _currentModalSubject = '';
+let _currentModalTo = '';
+
 async function sendOne(customerId) {
-  const { patterns, emailMap, cfg } = analysisResults;
+  const { patterns, emailMap, cfg } = _currentResults;
   const pattern = patterns.find(p => p.customerId === customerId);
-  if (!pattern) return;
   const contact = emailMap.get(customerId);
-  if (!contact?.email) return;
+  if (!pattern || !contact?.email) return;
+
+  if (!cfg.hasResend || cfg.dryRun) {
+    previewEmail(customerId);
+    return;
+  }
 
   const btn = document.getElementById(`send-btn-${customerId}`);
   const status = document.getElementById(`status-${customerId}`);
@@ -751,11 +754,11 @@ async function sendOne(customerId) {
   try {
     const html = buildEmailHtml(pattern, contact.contactName || pattern.customerName, cfg);
     const subject = buildSubject(pattern);
-    await sendEmail(contact.email, subject, html, cfg);
+    const result = await sendEmail(contact.email, subject, html, cfg);
     btn.innerHTML = '✓ Skickat';
     btn.className = 'text-sm px-3 py-1.5 rounded-lg bg-green-600 text-white font-medium cursor-default';
     status.className = 'mt-2 text-sm text-green-600';
-    status.textContent = cfg.dryRun ? '(Testläge – inget mail skickades)' : `Mail skickat till ${contact.email}`;
+    status.textContent = `Mail skickat till ${contact.email}`;
     status.classList.remove('hidden');
     log(`✓ ${pattern.customerName} <${contact.email}>`, 'ok');
   } catch (err) {
@@ -769,35 +772,45 @@ async function sendOne(customerId) {
 }
 
 async function sendAll() {
-  const { patterns, emailMap } = analysisResults;
+  const { patterns, emailMap, cfg } = _currentResults;
   const targets = patterns.filter(p => p.isOverdue && emailMap.get(p.customerId)?.email);
+  if (!cfg.hasResend || cfg.dryRun) {
+    // Preview first one
+    if (targets.length) previewEmail(targets[0].customerId);
+    return;
+  }
   if (!confirm(`Skicka påminnelsemail till ${targets.length} kunder?`)) return;
   const btn = document.getElementById('send-all-btn');
   btn.disabled = true;
   for (const p of targets) await sendOne(p.customerId);
-  btn.innerHTML = '✓ Alla mail skickade';
-  btn.className = btn.className.replace('bg-green-600 hover:bg-green-700', 'bg-gray-400 cursor-default');
+  btn.textContent = '✓ Alla skickade';
 }
 
 function previewEmail(customerId) {
-  const { patterns, emailMap, cfg } = analysisResults;
+  const { patterns, emailMap, cfg } = _currentResults;
   const pattern = patterns.find(p => p.customerId === customerId);
-  if (!pattern) return;
   const contact = emailMap.get(customerId);
   const contactName = contact?.contactName || pattern.customerName;
   const html = buildEmailHtml(pattern, contactName, cfg);
+  const subject = buildSubject(pattern);
+  const email = contact?.email || '';
 
-  currentModalCustomer = customerId;
-  document.getElementById('modal-title').textContent = `Förhandsgranska – ${pattern.customerName}`;
-  document.getElementById('modal-email-to').textContent = contact?.email || 'Ingen e-post registrerad';
-  const frame = document.getElementById('modal-frame');
-  frame.srcdoc = html;
+  _currentModalId = customerId;
+  _currentModalHtml = html;
+  _currentModalSubject = subject;
+  _currentModalTo = email;
+
+  document.getElementById('modal-title').textContent = `Förhandsgranska — ${pattern.customerName}`;
+  document.getElementById('modal-email-to').textContent = email || 'Ingen e-post registrerad';
+  document.getElementById('modal-frame').srcdoc = html;
 
   const sendBtn = document.getElementById('modal-send-btn');
-  if (!contact?.email) {
+  if (!cfg.hasResend || cfg.dryRun || !email) {
+    sendBtn.textContent = cfg.dryRun ? '⏸ Testläge aktivt' : '🔑 Ange Resend-nyckel för att skicka';
     sendBtn.disabled = true;
-    sendBtn.className = sendBtn.className + ' opacity-50 cursor-not-allowed';
+    sendBtn.className = sendBtn.className.replace('hover:bg-[#162438]','') + ' opacity-50 cursor-not-allowed';
   } else {
+    sendBtn.textContent = '📬 Skicka via Resend';
     sendBtn.disabled = false;
   }
 
@@ -806,8 +819,23 @@ function previewEmail(customerId) {
   modal.classList.add('flex');
 }
 
+function copyEmailHtml() {
+  navigator.clipboard.writeText(_currentModalHtml).then(() => {
+    const btn = event.target.closest('button');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Kopierat!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+function openMailto() {
+  const subject = encodeURIComponent(_currentModalSubject);
+  const body = encodeURIComponent('Se bifogat HTML-mail.');
+  window.location.href = `mailto:${_currentModalTo}?subject=${subject}&body=${body}`;
+}
+
 async function sendFromModal() {
-  await sendOne(currentModalCustomer);
+  await sendOne(_currentModalId);
   closeModal();
 }
 
