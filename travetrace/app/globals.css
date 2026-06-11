@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bakgrund: #060a07;
+  --color-panel: #0c1410;
+  --color-panel-ljus: #122019;
+  --color-kant: #1d322a;
+  --color-skrift: #d9e8df;
+  --color-dampad: #7da08f;
+  --color-accent: #3dff8b;
+  --color-accent-mork: #1d7a4a;
+  --color-varning: #ffb13d;
+  --color-fara: #ff5d5d;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SF Mono", monospace;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bakgrund);
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: "▋";
+  margin-left: 2px;
+  color: var(--color-accent);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anim-rise {
+  animation: rise 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise { animation: none; }
+  .cursor-blink::after { animation: none; }
+}
