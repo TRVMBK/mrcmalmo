@@ -32,10 +32,11 @@ const logoTypes = [
 ];
 
 const colors = [
-  { id: "white",  labelSv: "Vit",   labelEn: "White",  bg: "bg-[#111]",  border: "border-white/10" },
-  { id: "black",  labelSv: "Svart", labelEn: "Black",  bg: "bg-white",   border: "border-black/10" },
-  { id: "red",    labelSv: "Röd",   labelEn: "Red",    bg: "bg-[#111]",  border: "border-white/10" },
-  { id: "yellow", labelSv: "Gul",   labelEn: "Yellow", bg: "bg-[#111]",  border: "border-white/10" },
+  { id: "white",  labelSv: "Vit",    labelEn: "White",  bg: "bg-[#111]",  border: "border-white/10" },
+  { id: "black",  labelSv: "Svart",  labelEn: "Black",  bg: "bg-white",   border: "border-black/10" },
+  { id: "red",    labelSv: "Röd",    labelEn: "Red",    bg: "bg-[#111]",  border: "border-white/10" },
+  { id: "yellow", labelSv: "Gul",    labelEn: "Yellow", bg: "bg-[#111]",  border: "border-white/10" },
+  { id: "purple", labelSv: "Lila",   labelEn: "Purple", bg: "bg-[#111]",  border: "border-white/10" },
 ];
 
 const formats = ["svg", "eps", "png", "webp"];
@@ -99,6 +100,7 @@ function fileName(type: string, color: string) {
                       color.id === "white"  ? "bg-white" :
                       color.id === "black"  ? "bg-[#111]" :
                       color.id === "red"    ? "bg-[#E23A23]" :
+                      color.id === "purple" ? "bg-[#7B2FBE]" :
                                              "bg-[#F7DE10]"
                     }`}></span>
                     <span class="text-white font-semibold text-sm">{sv ? color.labelSv : color.labelEn}</span>
