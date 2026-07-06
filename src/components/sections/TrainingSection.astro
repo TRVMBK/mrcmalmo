@@ -9,15 +9,15 @@ const { lang } = Astro.props;
 const sv = lang === "sv";
 ---
 
-<section id="gruppaktiviteter" class="py-24 bg-[#111] border-t border-white/8">
+<section id="gruppaktiviteter" class="py-24 bg-[#eee5d2] border-t border-[#ddd0b6]">
   <div class="max-w-7xl mx-auto px-6">
 
     <div class="mb-14">
       <span class="skane-bar mb-5"></span>
-      <h2 class="text-4xl md:text-5xl font-black text-white">
+      <h2 class="text-4xl md:text-5xl font-black">
         {sv ? "Gruppaktiviteter" : "Group activities"}
       </h2>
-      <p class="text-white/50 mt-3 text-sm max-w-sm">
+      <p class="text-[#5a5a70] mt-3 text-sm max-w-sm">
         {sv
           ? "Kolla Facebook för ändringar av tid eller plats."
           : "Check Facebook for any changes to time or location."}
@@ -28,36 +28,36 @@ const sv = lang === "sv";
       {trainingSessions.map((s) => (
         <div class={`rounded-xl p-7 flex flex-col gap-6 ${
           s.isDenmark
-            ? "bg-[#1c1a10] border border-[#F7DE10]/40"
+            ? "bg-[#edf2e9] border border-[#357c4f]/40"
             : s.highlight
-            ? "bg-[#1a1212] border border-[#E23A23]/40"
-            : "bg-[#191919] border border-white/10"
+            ? "bg-[#f6ece9] border border-[#882c29]/40"
+            : "bg-[#faf6ec] border border-[#ddd0b6]"
         }`}>
           <!-- Day + time -->
           <div>
-            <p class="text-xs font-bold uppercase tracking-[0.18em] text-white/50 mb-1.5">
+            <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#5a5a70] mb-1.5">
               {sv ? s.daySv : s.dayEn}
             </p>
             {s.time && (
-              <p class="text-5xl font-black text-white tabular-nums leading-none">{s.time}</p>
+              <p class="text-5xl font-black tabular-nums leading-none">{s.time}</p>
             )}
           </div>
 
           <!-- Location -->
           <div class="flex items-start gap-3">
-            <div class={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${s.isDenmark ? "bg-[#F7DE10]" : "bg-[#E23A23]"}`}></div>
+            <div class={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${s.isDenmark ? "bg-[#357c4f]" : "bg-[#882c29]"}`}></div>
             <div class="min-w-0">
-              <p class="text-white font-bold text-base leading-snug">{sv ? s.locationSv : s.locationEn}</p>
-              <p class="text-white/50 text-sm mt-0.5 leading-snug">{s.address}</p>
+              <p class=" font-bold text-base leading-snug">{sv ? s.locationSv : s.locationEn}</p>
+              <p class="text-[#5a5a70] text-sm mt-0.5 leading-snug">{s.address}</p>
             </div>
           </div>
 
           <!-- Groups -->
-          <div class="border-t border-white/10 pt-5 space-y-3.5">
+          <div class="border-t border-[#ddd0b6] pt-5 space-y-3.5">
             {s.groups.map((g) => (
               <div class="flex items-baseline justify-between gap-3">
-                <span class="text-white/85 text-sm font-medium">{sv ? g.nameSv : g.nameEn}</span>
-                <span class="text-white/50 text-sm shrink-0">{sv ? g.detailSv : g.detailEn}</span>
+                <span class="text-[#3a3a52] text-sm font-medium">{sv ? g.nameSv : g.nameEn}</span>
+                <span class="text-[#5a5a70] text-sm shrink-0">{sv ? g.detailSv : g.detailEn}</span>
               </div>
             ))}
           </div>
@@ -66,8 +66,8 @@ const sv = lang === "sv";
           {s.noteSv && (
             <div class={`text-sm leading-relaxed px-4 py-3 rounded-lg border font-medium ${
               s.isDenmark
-                ? "text-[#F7DE10] bg-[#F7DE10]/8 border-[#F7DE10]/25"
-                : "text-[#ff9986] bg-[#E23A23]/8 border-[#E23A23]/25"
+                ? "text-[#357c4f] bg-[#357c4f]/8 border-[#357c4f]/25"
+                : "text-[#882c29] bg-[#882c29]/8 border-[#882c29]/25"
             }`}>
               {sv ? s.noteSv : s.noteEn}
             </div>
@@ -76,8 +76,8 @@ const sv = lang === "sv";
       ))}
     </div>
 
-    <p class="mt-8 text-white/60 text-sm flex items-center gap-2">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="shrink-0 text-white/50"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    <p class="mt-8 text-[#5a5a70] text-sm flex items-center gap-2">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="shrink-0 text-[#5a5a70]"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
       {sv ? "Vi springer året runt. Ingen lämnas efter." : "We run all year round. No one is left behind."}
     </p>
   </div>

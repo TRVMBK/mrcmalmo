@@ -1,23 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  /* Skåne brand colors */
-  --color-red: #E23A23;
-  --color-red-dark: #c0311c;
-  --color-yellow: #F7DE10;
-  --color-yellow-dark: #d4bc00;
+  /* Mikkeller brand colors */
+  --color-moss: #357c4f;         /* Moss Green — rubriker */
+  --color-heading: #357c4f;      /* alias för rubrikfärg */
+  --color-evening-blue: #0f0f54; /* Evening Blue — brödtext */
+  --color-burgundy: #882c29;     /* Burgundy — accent/CTA */
+  --color-burgundy-dark: #6f231f;
 
-  /* Surface */
-  --color-background: #0c0c0c;
-  --color-surface: #161616;
-  --color-surface-2: #202020;
-  --color-border: #2c2c2c;
-  --color-border-subtle: #1e1e1e;
+  /* Accent-alias (behåller gamla varunamn så utilities som text-red/bg-red mappas om) */
+  --color-red: #882c29;
+  --color-red-dark: #6f231f;
+  --color-yellow: #357c4f;
+  --color-yellow-dark: #2c6841;
+
+  /* Surface — ljust "Paper"-tema */
+  --color-background: #eee5d2;    /* Paper */
+  --color-surface: #faf6ec;       /* ljus cream (kort) */
+  --color-surface-2: #f3ead6;     /* nested */
+  --color-border: #ddd0b6;        /* varm tan */
+  --color-border-subtle: #e6dcc6;
 
   /* Text */
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #a3a3a3;
-  --color-text-muted: #525252;
+  --color-text-primary: #0f0f54;  /* Evening Blue */
+  --color-text-secondary: #4a4a63;
+  --color-text-muted: #8a8578;
 
   --font-sans: "Inter", system-ui, sans-serif;
 
@@ -67,22 +74,28 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Rubriker i Moss Green som standard. Komponenter som behåller en egen
+   text-färg-utility (t.ex. hero-titeln över fotot) vinner via högre specificitet. */
+h1, h2, h3, h4 {
+  color: var(--color-heading);
+}
+
 * {
   box-sizing: border-box;
 }
 
-/* Utility: Skåne cross accent (yellow bar) */
+/* Utility: accent-streck (Moss Green) */
 .skane-bar {
   display: block;
   width: 40px;
   height: 3px;
-  background: #F7DE10;
+  background: #357c4f;
   border-radius: 2px;
 }
 
 /* Focus styles — synlig tangentbordsnavigering */
 :focus-visible {
-  outline: 2px solid #F7DE10;
+  outline: 2px solid #882c29;
   outline-offset: 3px;
   border-radius: 3px;
 }

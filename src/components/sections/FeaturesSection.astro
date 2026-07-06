@@ -18,26 +18,26 @@ const icons = {
 };
 ---
 
-<section class="py-24 bg-[#161616] border-t border-[#1e1e1e]">
+<section class="py-24 bg-[#faf6ec] border-t border-[#ddd0b6]">
   <div class="max-w-7xl mx-auto px-6">
 
     <div class="mb-14">
       <span class="skane-bar mb-5"></span>
-      <h2 class="text-4xl md:text-5xl font-black text-white">
+      <h2 class="text-4xl md:text-5xl font-black">
         {sv ? "Varför springa med MRC?" : "Why run with MRC?"}
       </h2>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#ddd0b6]">
       {features.map((f) => (
-        <div class="bg-[#161616] p-8 group hover:bg-[#1c1c1c] transition-colors">
-          <div class="mb-5 text-[#E23A23] group-hover:text-[#F7DE10] transition-colors">
+        <div class="bg-[#eee5d2] p-8 group hover:bg-[#e7dcc4] transition-colors">
+          <div class="mb-5 text-[#882c29] group-hover:text-[#357c4f] transition-colors">
             <Fragment set:html={icons[f.icon]} />
           </div>
-          <h3 class="text-white font-bold text-base mb-2.5">
+          <h3 class="font-bold text-base mb-2.5">
             {sv ? f.titleSv : f.titleEn}
           </h3>
-          <p class="text-white/60 text-sm leading-relaxed">
+          <p class="text-[#5a5a70] text-sm leading-relaxed">
             {sv ? f.bodySv : f.bodyEn}
           </p>
         </div>

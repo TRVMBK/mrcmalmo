@@ -19,10 +19,10 @@ const sv = lang === "sv";
       style="top: -18%; height: 118%; object-fit: cover; object-position: center center;"
       fetchpriority="high"
     />
-    <!-- Strong gradient: very dark at bottom 40%, fade through middle -->
-    <div class="absolute inset-0 bg-gradient-to-t from-[#0c0c0c] from-30% via-[#0c0c0c]/60 via-60% to-[#0c0c0c]/20 to-100%"></div>
-    <!-- Subtle red glow at very bottom -->
-    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#E23A23]/8 to-transparent"></div>
+    <!-- Strong gradient: fade to Paper at bottom so photo blends into the light page -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#3a2a1e] from-15% via-[#3a2a1e]/55 via-55% to-transparent to-100%"></div>
+    <!-- Subtle burgundy glow at very bottom -->
+    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#882c29]/12 to-transparent"></div>
   </div>
 
   <!-- TOP: Skyline logo — sits in the clear photo area -->
@@ -61,7 +61,7 @@ const sv = lang === "sv";
     <div class="flex flex-wrap gap-3" style="animation: var(--animate-fade-up-delay-4)">
       <a
         href="#gruppaktiviteter"
-        class="inline-flex items-center gap-2 bg-[#E23A23] hover:bg-[#c0311c] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm"
+        class="inline-flex items-center gap-2 bg-[#882c29] hover:bg-[#6f231f] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm"
       >
         {sv ? "Se gruppaktiviteter" : "See group activities"}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -78,15 +78,15 @@ const sv = lang === "sv";
 
     <!-- Stats -->
     <div class="mt-10 flex flex-wrap gap-6" style="animation: var(--animate-fade-up-delay-4)">
-      <div class="border-l-2 border-[#F7DE10] pl-4">
+      <div class="border-l-2 border-[#357c4f] pl-4">
         <div class="text-2xl font-black text-white">2018</div>
         <div class="text-xs text-white/50 mt-0.5 uppercase tracking-wider">{sv ? "Grundat" : "Founded"}</div>
       </div>
-      <div class="border-l-2 border-[#F7DE10] pl-4">
+      <div class="border-l-2 border-[#357c4f] pl-4">
         <div class="text-2xl font-black text-white">100+</div>
         <div class="text-xs text-white/50 mt-0.5 uppercase tracking-wider">{sv ? "Aktiva löpare" : "Active runners"}</div>
       </div>
-      <div class="border-l-2 border-[#F7DE10] pl-4">
+      <div class="border-l-2 border-[#357c4f] pl-4">
         <div class="text-2xl font-black text-white">{sv ? "Gratis" : "Free"}</div>
         <div class="text-xs text-white/50 mt-0.5 uppercase tracking-wider">{sv ? "Alltid" : "Always"}</div>
       </div>

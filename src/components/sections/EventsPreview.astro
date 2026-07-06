@@ -12,18 +12,18 @@ const { lang, events } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section class="py-24 bg-[#0a0a0a]">
+<section class="py-24 bg-[#eee5d2]">
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex items-end justify-between mb-12">
       <div>
-        <p class="text-orange-500 text-xs font-semibold uppercase tracking-widest mb-2">
+        <p class="text-[#882c29] text-xs font-semibold uppercase tracking-widest mb-2">
           {lang === "sv" ? "Häng med" : "Join us"}
         </p>
-        <h2 class="text-4xl md:text-5xl font-black text-white">{t.events.title}</h2>
+        <h2 class="text-4xl md:text-5xl font-black">{t.events.title}</h2>
       </div>
       <a
         href={getLocalizedPath(lang, "/events")}
-        class="hidden sm:flex items-center gap-2 text-sm font-semibold text-zinc-400 hover:text-white transition-colors"
+        class="hidden sm:flex items-center gap-2 text-sm font-semibold text-[#4a4a63] hover:text-[#882c29] transition-colors"
       >
         {t.events.seeAll}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -33,7 +33,7 @@ const t = useTranslations(lang);
     </div>
 
     {events.length === 0 ? (
-      <div class="text-center py-20 text-zinc-600">
+      <div class="text-center py-20 text-[#8a8578]">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4 opacity-40">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
           <line x1="16" y1="2" x2="16" y2="6"/>
@@ -54,7 +54,7 @@ const t = useTranslations(lang);
       <div class="mt-8 text-center sm:hidden">
         <a
           href={getLocalizedPath(lang, "/events")}
-          class="text-sm font-semibold text-orange-500 hover:text-orange-400 transition-colors"
+          class="text-sm font-semibold text-[#882c29] hover:text-[#6f231f] transition-colors"
         >
           {t.events.seeAll} →
         </a>

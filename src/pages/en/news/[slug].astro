@@ -33,7 +33,7 @@ const dateStr = post.data.pubDate.toLocaleDateString("en-US", {
   lang={lang}
 >
   <article class="max-w-3xl mx-auto px-6 py-20">
-    <a href="/en/news" class="text-sm text-zinc-500 hover:text-orange-500 transition-colors flex items-center gap-1 mb-8">
+    <a href="/en/news" class="text-sm text-[#5a5a70] hover:text-[#882c29] transition-colors flex items-center gap-1 mb-8">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M19 12H5M12 5l-7 7 7 7"/>
       </svg>
@@ -48,16 +48,16 @@ const dateStr = post.data.pubDate.toLocaleDateString("en-US", {
       />
     )}
 
-    <div class="flex items-center gap-2 text-xs text-zinc-600 mb-4">
+    <div class="flex items-center gap-2 text-xs text-[#8a8578] mb-4">
       <time datetime={post.data.pubDate.toISOString()}>{dateStr}</time>
       <span>&middot;</span>
       <span>{post.data.author}</span>
     </div>
 
-    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-4">{title}</h1>
-    <p class="text-xl text-zinc-400 leading-relaxed mb-8">{description}</p>
+    <h1 class="text-4xl md:text-5xl font-black leading-tight mb-4">{title}</h1>
+    <p class="text-xl text-[#4a4a63] leading-relaxed mb-8">{description}</p>
 
-    <div class="prose prose-invert prose-zinc max-w-none prose-headings:font-black prose-a:text-orange-500 prose-a:no-underline hover:prose-a:underline">
+    <div class="prose prose-zinc max-w-none prose-headings:font-black prose-a:text-[#882c29] prose-a:no-underline hover:prose-a:underline">
       <Content />
     </div>
   </article>

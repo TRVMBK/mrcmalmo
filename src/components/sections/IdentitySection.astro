@@ -9,30 +9,30 @@ const { lang } = Astro.props;
 const sv = lang === "sv";
 
 const logos = [
-  { file: "MRC - Skyline - white.svg",      alt: "Skyline" },
-  { file: "MRC - Henry & Sally - white.svg", alt: "Henry & Sally" },
-  { file: "MRC - Yin Yang - white.svg",      alt: "Yin Yang" },
+  { file: "MRC - Skyline - green.svg",      alt: "Skyline" },
+  { file: "MRC - Henry & Sally - green.svg", alt: "Henry & Sally" },
+  { file: "MRC - Yin Yang - green.svg",      alt: "Yin Yang" },
 ];
 ---
 
-<section class="py-24 bg-[#0c0c0c] border-t border-white/8">
+<section class="py-24 bg-[#eee5d2] border-t border-[#ddd0b6]">
   <div class="max-w-7xl mx-auto px-6">
 
     <!-- Top: heading + logo strip -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
       <div>
         <span class="skane-bar mb-5"></span>
-        <h2 class="text-4xl md:text-5xl font-black text-white leading-tight mb-5">
+        <h2 class="text-4xl md:text-5xl font-black leading-tight mb-5">
           {sv ? "Märket som\nspringer med dig" : "The badge that\nruns with you"}
         </h2>
-        <p class="text-white/55 text-base leading-relaxed mb-8 max-w-md">
+        <p class="text-[#5a5a70] text-base leading-relaxed mb-8 max-w-md">
           {sv
             ? "Tre logotyper, fyra färger, en gemenskap. Våra märken bär med sig allt MRC Malmö står för — löparglädje, ölkultur och en stad vi älskar. Ladda ner dem fritt för allt som hör klubben till."
             : "Three logos, four colours, one community. Our badges carry everything MRC Malmö stands for — the joy of running, beer culture, and a city we love. Download them freely for anything club-related."}
         </p>
         <a
           href={getLocalizedPath(lang, "/logotyp")}
-          class="inline-flex items-center gap-2 bg-[#E23A23] hover:bg-[#c0311c] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm"
+          class="inline-flex items-center gap-2 bg-[#882c29] hover:bg-[#6f231f] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm"
         >
           {sv ? "Se alla logotyper" : "Browse all logos"}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -41,7 +41,7 @@ const logos = [
 
       <div class="grid grid-cols-3 gap-3">
         {logos.map((logo) => (
-          <div class="bg-[#161616] border border-white/8 rounded-xl p-6 flex items-center justify-center aspect-square">
+          <div class="bg-[#faf6ec] border border-[#ddd0b6] rounded-xl p-6 flex items-center justify-center aspect-square">
             <img
               src={`/logos/${logo.file}`}
               alt={`MRC ${logo.alt}`}
@@ -57,33 +57,33 @@ const logos = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
       <!-- Card 1: Netshirt membership store -->
-      <div class="bg-[#161616] border border-white/8 rounded-2xl p-8 flex flex-col">
+      <div class="bg-[#faf6ec] border border-[#ddd0b6] rounded-2xl p-8 flex flex-col">
         <div class="flex items-start gap-4 mb-5">
-          <div class="w-10 h-10 rounded-lg bg-[#F7DE10]/10 flex items-center justify-center shrink-0">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7DE10" stroke-width="1.8">
+          <div class="w-10 h-10 rounded-lg bg-[#357c4f]/10 flex items-center justify-center shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#357c4f" stroke-width="1.8">
               <path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
             </svg>
           </div>
           <div>
-            <p class="text-[#F7DE10] text-xs font-bold uppercase tracking-widest mb-1">
+            <p class="text-[#357c4f] text-xs font-bold uppercase tracking-widest mb-1">
               {sv ? "Profilkläder" : "Club gear"}
             </p>
-            <h3 class="text-xl font-black text-white leading-snug">
+            <h3 class="text-xl font-black leading-snug">
               {sv ? "Beställ MRC-kläder" : "Order MRC apparel"}
             </h3>
           </div>
         </div>
 
-        <p class="text-white/55 text-sm leading-relaxed mb-6 flex-1">
+        <p class="text-[#5a5a70] text-sm leading-relaxed mb-6 flex-1">
           {sv
             ? "Vi håller på att sätta upp en dedikerad medlemsbutik — men i väntan på det kan du redan nu beställa MRC-profilkläder direkt via Netshirt. Välj plagg, välj färg och ladda upp logotypen så får du ett riktigt snyggt resultat."
             : "We're setting up a dedicated members' store — but while you wait, you can already order MRC club apparel directly through Netshirt. Pick your garment, pick your colour, upload the logo, and you'll get a great result."}
         </p>
 
         <!-- EPS tip -->
-        <div class="bg-white/4 border border-white/8 rounded-lg px-4 py-3 mb-6 flex gap-3">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F7DE10" stroke-width="1.8" class="shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          <p class="text-white/60 text-xs leading-relaxed">
+        <div class="bg-black/5 border border-[#ddd0b6] rounded-lg px-4 py-3 mb-6 flex gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#357c4f" stroke-width="1.8" class="shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <p class="text-[#5a5a70] text-xs leading-relaxed">
             {sv
               ? "Använd EPS-filen för bäst tryckresultat — det är ett vektorformat som bevarar skärpan oavsett storlek på trycket."
               : "Use the EPS file for the best print result — it's a vector format that keeps the logo sharp at any print size."}
@@ -94,7 +94,7 @@ const logos = [
           href="https://www.netshirt.se/"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 bg-[#F7DE10] hover:bg-yellow-300 text-black font-bold px-5 py-3 rounded-lg transition-colors text-sm"
+          class="inline-flex items-center justify-center gap-2 bg-[#357c4f] hover:bg-[#2c6841] text-white font-bold px-5 py-3 rounded-lg transition-colors text-sm"
         >
           {sv ? "Gå till Netshirt" : "Go to Netshirt"}
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -102,35 +102,35 @@ const logos = [
       </div>
 
       <!-- Card 2: Stik local printing -->
-      <div class="bg-[#161616] border border-white/8 rounded-2xl p-8 flex flex-col">
+      <div class="bg-[#faf6ec] border border-[#ddd0b6] rounded-2xl p-8 flex flex-col">
         <div class="flex items-start gap-4 mb-5">
-          <div class="w-10 h-10 rounded-lg bg-[#E23A23]/10 flex items-center justify-center shrink-0">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E23A23" stroke-width="1.8">
+          <div class="w-10 h-10 rounded-lg bg-[#882c29]/10 flex items-center justify-center shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#882c29" stroke-width="1.8">
               <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
             </svg>
           </div>
           <div>
-            <p class="text-[#E23A23] text-xs font-bold uppercase tracking-widest mb-1">
+            <p class="text-[#882c29] text-xs font-bold uppercase tracking-widest mb-1">
               {sv ? "Tryck på eget plagg" : "Print on your own garment"}
             </p>
-            <h3 class="text-xl font-black text-white leading-snug">
+            <h3 class="text-xl font-black leading-snug">
               {sv ? "Stik — 100 kr per tryck" : "Stik — 100 kr per print"}
             </h3>
           </div>
         </div>
 
-        <p class="text-white/55 text-sm leading-relaxed mb-4 flex-1">
+        <p class="text-[#5a5a70] text-sm leading-relaxed mb-4 flex-1">
           {sv
             ? "Har du redan ett favoritplagg du vill sätta MRC-märket på? Gå till Stik t-shirt tryck & reklam på Kronborgsvägen 8 i Malmö. För 100 kr per enfärgstryck sätter de en logotyp direkt på ditt plagg — snabbt, lokalt och schysst."
             : "Got a favourite garment you want the MRC badge on? Head to Stik t-shirt tryck & reklam at Kronborgsvägen 8 in Malmö. For 100 kr per single-colour print, they'll put a logo straight onto your garment — quick, local, and good."}
         </p>
 
         <!-- Washing tip -->
-        <div class="bg-white/4 border border-white/8 rounded-lg px-4 py-3 mb-6 flex gap-3">
+        <div class="bg-black/5 border border-[#ddd0b6] rounded-lg px-4 py-3 mb-6 flex gap-3">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" class="shrink-0 mt-0.5">
             <path d="M12 22C6.5 22 2 17.5 2 12c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10z"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
           </svg>
-          <p class="text-white/60 text-xs leading-relaxed">
+          <p class="text-[#5a5a70] text-xs leading-relaxed">
             {sv
               ? "Tvätta plagget ordentligt innan du tar det till tryckeriet — all svett måste bort. Skippa sköljmedlet och häll i 2 msk ättiksprit i sköljfacket istället. Det tar bort rester lika effektivt, är miljövänligare och förstör inte tyget."
               : "Make sure to wash your garment properly before bringing it to the printer — all sweat must go. Skip the fabric softener and pour 2 tbsp of white vinegar into the softener compartment instead. It removes residue just as effectively, is more eco-friendly, and won't damage the fabric."}
@@ -141,7 +141,7 @@ const logos = [
           href="https://maps.google.com/?q=Kronborgsvägen+8+Malmö"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 border border-white/15 hover:border-[#E23A23]/50 hover:bg-[#E23A23]/8 text-white font-bold px-5 py-3 rounded-lg transition-all text-sm"
+          class="inline-flex items-center justify-center gap-2 border border-[#ddd0b6] hover:border-[#882c29]/50 hover:bg-[#882c29]/8 font-bold px-5 py-3 rounded-lg transition-all text-sm"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Kronborgsvägen 8, Malmö

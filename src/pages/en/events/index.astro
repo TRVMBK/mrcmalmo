@@ -16,13 +16,13 @@ const events = await getAllEvents();
 >
   <div class="max-w-7xl mx-auto px-6 py-20">
     <div class="mb-12">
-      <p class="text-orange-500 text-xs font-semibold uppercase tracking-widest mb-3">Join us</p>
-      <h1 class="text-5xl md:text-6xl font-black text-white mb-4">{t.events.allEvents}</h1>
-      <p class="text-zinc-400 max-w-xl">{t.events.subtitle}</p>
+      <p class="text-[#882c29] text-xs font-semibold uppercase tracking-widest mb-3">Join us</p>
+      <h1 class="text-5xl md:text-6xl font-black mb-4">{t.events.allEvents}</h1>
+      <p class="text-[#4a4a63] max-w-xl">{t.events.subtitle}</p>
     </div>
 
     {events.length === 0 ? (
-      <div class="text-center py-24 text-zinc-600">
+      <div class="text-center py-24 text-[#8a8578]">
         <p class="text-lg">{t.events.noEvents}</p>
       </div>
     ) : (
