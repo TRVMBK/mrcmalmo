@@ -77,16 +77,16 @@ export const sv = {
     global: "MRC Global",
   },
   meta: {
-    siteTitle: "MRC Malmö – Löparklubb i Malmö",
+    siteTitle: "Mikkeller Running Club Malmö – Löparklubb (MRC)",
     siteDescription:
       "Mikkeller Running Club Malmö – löparklubb för alla nivåer. Vi träffas varje vecka för löpning och öl i Malmö. Välkommen att springa med oss!",
-    eventsTitle: "Evenemang | MRC Malmö – Löparklubb i Malmö",
+    eventsTitle: "Evenemang | Mikkeller Running Club Malmö (MRC)",
     eventsDescription: "Kommande löpningar och evenemang för Mikkeller Running Club Malmö.",
-    newsTitle: "Nyheter | MRC Malmö",
+    newsTitle: "Nyheter | Mikkeller Running Club Malmö (MRC)",
     newsDescription: "Senaste nytt från Mikkeller Running Club Malmö.",
-    aboutTitle: "Om oss | MRC Malmö – Löparklubb i Malmö",
+    aboutTitle: "Om oss | Mikkeller Running Club Malmö (MRC)",
     aboutDescription: "Lär känna Mikkeller Running Club Malmö – vilka vi är, hur vi springer och varför vi alltid avslutar med öl.",
-    logoTitle: "Logotyp | MRC Malmö",
+    logoTitle: "Logotyp | Mikkeller Running Club Malmö (MRC)",
     logoDescription: "Ladda ner den officiella logotypen för Mikkeller Running Club Malmö i SVG och PNG.",
   },
 } as const;

@@ -79,16 +79,16 @@ export const en: Translations = {
     global: "MRC Global",
   },
   meta: {
-    siteTitle: "MRC Malmö – Running Club in Malmö",
+    siteTitle: "Mikkeller Running Club Malmö – Social Running (MRC)",
     siteDescription:
       "Mikkeller Running Club Malmö – running club for all levels. We meet weekly for running and beer in Malmö. Welcome to run with us!",
-    eventsTitle: "Events | MRC Malmö – Running Club in Malmö",
+    eventsTitle: "Events | Mikkeller Running Club Malmö (MRC)",
     eventsDescription: "Upcoming runs and events for Mikkeller Running Club Malmö.",
-    newsTitle: "News | MRC Malmö",
+    newsTitle: "News | Mikkeller Running Club Malmö (MRC)",
     newsDescription: "Latest news from Mikkeller Running Club Malmö.",
-    aboutTitle: "About | MRC Malmö – Running Club in Malmö",
+    aboutTitle: "About | Mikkeller Running Club Malmö (MRC)",
     aboutDescription: "Get to know Mikkeller Running Club Malmö – who we are, how we run, and why we always finish with beer.",
-    logoTitle: "Logo | MRC Malmö",
+    logoTitle: "Logo | Mikkeller Running Club Malmö (MRC)",
     logoDescription: "Download the official Mikkeller Running Club Malmö logo in SVG and PNG.",
   },
 };
