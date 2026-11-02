@@ -127,6 +127,33 @@ function fileName(type: string, color: string) {
       </div>
     ))}
 
+    <!-- Font download -->
+    <div class="mb-20">
+      <div class="flex items-baseline gap-4 mb-6 border-b border-[#ddd0b6] pb-4">
+        <h2 class="text-2xl font-black">{sv ? "Typsnitt" : "Typeface"}</h2>
+        <span class="text-[#5a5a70] text-sm">Mikkeller Special Brew</span>
+      </div>
+      <div class="rounded-xl border border-[#ddd0b6] bg-[#faf6ec] p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="min-w-0">
+          <p class="mikkel-font text-4xl md:text-5xl leading-tight break-words">Mikkeller Running Club Malmö</p>
+          <p class="mikkel-font text-xl text-[#5a5a70] mt-3 break-words">ABCDEFGHIJKLM NOPQRSTUVWXYZ 0123456789</p>
+          <p class="text-[#5a5a70] text-sm mt-4">
+            {sv
+              ? "Typsnittet som används i Mikkellers profil. Perfekt till egna tröjor och tryck."
+              : "The typeface used in the Mikkeller identity. Great for custom shirts and prints."}
+          </p>
+        </div>
+        <a
+          href="/fonts/MikkelWind.ttf"
+          download="MikkelWind.ttf"
+          class="inline-flex items-center gap-3 bg-[#882c29] hover:bg-[#6f231f] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm whitespace-nowrap"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          {sv ? "Ladda ner TTF" : "Download TTF"}
+        </a>
+      </div>
+    </div>
+
     <!-- Download all -->
     <div class="mt-8 pt-12 border-t border-[#ddd0b6] flex flex-col sm:flex-row items-center justify-between gap-6">
       <div>
@@ -163,3 +190,14 @@ function fileName(type: string, color: string) {
 
   </div>
 </div>
+
+<style is:global>
+  @font-face {
+    font-family: "Mikkeller Special Brew";
+    src: url("/fonts/MikkelWind.ttf") format("truetype");
+    font-display: swap;
+  }
+  .mikkel-font {
+    font-family: "Mikkeller Special Brew", system-ui, sans-serif;
+  }
+</style>

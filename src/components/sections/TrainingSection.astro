@@ -47,7 +47,11 @@ const sv = lang === "sv";
           <div class="flex items-start gap-3">
             <div class={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${s.isDenmark ? "bg-[#357c4f]" : "bg-[#882c29]"}`}></div>
             <div class="min-w-0">
-              <p class=" font-bold text-base leading-snug">{sv ? s.locationSv : s.locationEn}</p>
+              <p class=" font-bold text-base leading-snug">
+                {s.url
+                  ? <a href={s.url} target="_blank" rel="noopener" class="hover:text-[#882c29] underline decoration-[#ddd0b6] underline-offset-4">{sv ? s.locationSv : s.locationEn}</a>
+                  : (sv ? s.locationSv : s.locationEn)}
+              </p>
               <p class="text-[#5a5a70] text-sm mt-0.5 leading-snug">{s.address}</p>
             </div>
           </div>
