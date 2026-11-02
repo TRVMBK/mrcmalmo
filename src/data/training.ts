@@ -5,6 +5,7 @@ export type TrainingSession = {
   locationSv: string;
   locationEn: string;
   address: string;
+  url?: string;
   noteSv?: string;
   noteEn?: string;
   groups: Array<{
@@ -45,12 +46,13 @@ export const trainingSessions: TrainingSession[] = [
     highlight: true,
   },
   {
-    daySv: "3:e lördagen/mån",
-    dayEn: "3rd Saturday/month",
-    time: "12:00",
-    locationSv: "Moriskan eller Hylliebryggeriet",
-    locationEn: "Moriskan or Hylliebryggeriet",
-    address: "Sommar: Folkets Park · Vinter: Hylliebryggeriet",
+    daySv: "Lördag",
+    dayEn: "Saturday",
+    time: "13:00",
+    locationSv: "Malmö Brewing",
+    locationEn: "Malmö Brewing",
+    address: "Bergsgatan 33",
+    url: "https://malmobrewing.com/",
     groups: [
       {
         nameSv: "Ghost vision style",
