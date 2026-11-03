@@ -1,6 +1,7 @@
 ---
 import { getLocalizedPath } from "@i18n/index";
 import type { Lang } from "@i18n/index";
+import { SHOP_URL, NETSHIRT_URL } from "../../data/shop";
 
 interface Props {
   lang: Lang;
@@ -78,10 +79,21 @@ const year = new Date().getFullYear();
         <ul class="space-y-2.5">
           <li><a href={getLocalizedPath(lang, "/")} class="text-sm text-[#4a4a63] hover:text-[#882c29] transition-colors">{sv ? "Hem" : "Home"}</a></li>
           <li><a href={getLocalizedPath(lang, "/logotyp")} class="text-sm text-[#4a4a63] hover:text-[#882c29] transition-colors">{sv ? "Logotyp" : "Logo"}</a></li>
+          <li><a href={SHOP_URL} target="_blank" rel="noopener noreferrer" class="text-sm text-[#4a4a63] hover:text-[#882c29] transition-colors">{sv ? "Klubbshop" : "Club shop"}</a></li>
           <li><a href="https://mikkeller.com/mrc" target="_blank" rel="noopener noreferrer" class="text-sm text-[#4a4a63] hover:text-[#882c29] transition-colors">MRC Global</a></li>
         </ul>
       </div>
 
+    </div>
+
+    <!-- Samarbetspartner -->
+    <div class="border-t border-[#ddd0b6] pt-8 mb-8 flex items-center gap-4">
+      <span class="text-xs font-semibold text-[#5a5a70] uppercase tracking-widest">
+        {sv ? "Samarbetspartner" : "Partner"}
+      </span>
+      <a href={NETSHIRT_URL} target="_blank" rel="noopener noreferrer" aria-label="Netshirt">
+        <img src="/images/partners/netshirt.png" alt="Netshirt" width="233" height="52" class="h-6 w-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" />
+      </a>
     </div>
 
     <div class="border-t border-[#ddd0b6] pt-8 flex flex-col sm:flex-row justify-between items-center gap-3">

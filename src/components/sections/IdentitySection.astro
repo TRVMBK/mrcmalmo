@@ -1,6 +1,7 @@
 ---
 import { getLocalizedPath } from "@i18n/index";
 import type { Lang } from "@i18n/index";
+import { SHOP_URL, FLYER_URL } from "../../data/shop";
 
 interface Props {
   lang: Lang;
@@ -56,7 +57,7 @@ const logos = [
     <!-- Bottom: two action cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <!-- Card 1: Netshirt membership store -->
+      <!-- Card 1: Official club shop at Netshirt -->
       <div class="bg-[#faf6ec] border border-[#ddd0b6] rounded-2xl p-8 flex flex-col">
         <div class="flex items-start gap-4 mb-5">
           <div class="w-10 h-10 rounded-lg bg-[#357c4f]/10 flex items-center justify-center shrink-0">
@@ -66,39 +67,39 @@ const logos = [
           </div>
           <div>
             <p class="text-[#357c4f] text-xs font-bold uppercase tracking-widest mb-1">
-              {sv ? "Profilkläder" : "Club gear"}
+              {sv ? "Klubbshop" : "Club shop"}
             </p>
             <h3 class="text-xl font-black leading-snug">
-              {sv ? "Beställ MRC-kläder" : "Order MRC apparel"}
+              {sv ? "Officiella MRC-kläder" : "Official MRC apparel"}
             </h3>
           </div>
         </div>
 
         <p class="text-[#5a5a70] text-sm leading-relaxed mb-6 flex-1">
           {sv
-            ? "Vi håller på att sätta upp en dedikerad medlemsbutik — men i väntan på det kan du redan nu beställa MRC-profilkläder direkt via Netshirt. Välj plagg, välj färg och ladda upp logotypen så får du ett riktigt snyggt resultat."
-            : "We're setting up a dedicated members' store — but while you wait, you can already order MRC club apparel directly through Netshirt. Pick your garment, pick your colour, upload the logo, and you'll get a great result."}
+            ? "Vår egen klubbshop hos Netshirt! Hög kvalitet, snygg design och tydlig klubbkänsla — mössor, kepsar, hoodies, jackor och träningskläder. När du handlar stöttar du klubbens verksamhet."
+            : "Our very own club shop at Netshirt! High quality, great design and a strong club feel — beanies, caps, hoodies, jackets and running gear. When you shop, you support the club's activities."}
         </p>
 
-        <!-- EPS tip -->
-        <div class="bg-black/5 border border-[#ddd0b6] rounded-lg px-4 py-3 mb-6 flex gap-3">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#357c4f" stroke-width="1.8" class="shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          <p class="text-[#5a5a70] text-xs leading-relaxed">
-            {sv
-              ? "Använd EPS-filen för bäst tryckresultat — det är ett vektorformat som bevarar skärpan oavsett storlek på trycket."
-              : "Use the EPS file for the best print result — it's a vector format that keeps the logo sharp at any print size."}
-          </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a
+            href={SHOP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 bg-[#357c4f] hover:bg-[#2c6841] text-white font-bold px-5 py-3 rounded-lg transition-colors text-sm"
+          >
+            {sv ? "Till klubbshopen" : "Go to the club shop"}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+          <a
+            href={FLYER_URL}
+            download="Reklamblad-Mikkeller-Running-Club-2026.pdf"
+            class="inline-flex items-center justify-center gap-2 border border-[#ddd0b6] hover:border-[#357c4f]/60 font-bold px-5 py-3 rounded-lg transition-all text-sm"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            {sv ? "Ladda ner reklamblad" : "Download flyer"}
+          </a>
         </div>
-
-        <a
-          href="https://www.netshirt.se/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 bg-[#357c4f] hover:bg-[#2c6841] text-white font-bold px-5 py-3 rounded-lg transition-colors text-sm"
-        >
-          {sv ? "Gå till Netshirt" : "Go to Netshirt"}
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
       </div>
 
       <!-- Card 2: Stik local printing -->

@@ -1,5 +1,6 @@
 ---
 import type { Lang } from "@i18n/index";
+import { FLYER_URL, SHOP_URL } from "../../data/shop";
 
 interface Props {
   lang: Lang;
@@ -151,6 +152,49 @@ function fileName(type: string, color: string) {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           {sv ? "Ladda ner TTF" : "Download TTF"}
         </a>
+      </div>
+    </div>
+
+    <!-- Flyer download -->
+    <div class="mb-20">
+      <div class="flex items-baseline gap-4 mb-6 border-b border-[#ddd0b6] pb-4">
+        <h2 class="text-2xl font-black">{sv ? "Reklamblad" : "Flyer"}</h2>
+        <span class="text-[#5a5a70] text-sm">{sv ? "A4 · PDF · med QR-kod till klubbshopen" : "A4 · PDF · with QR code to the club shop"}</span>
+      </div>
+      <div class="rounded-xl border border-[#ddd0b6] bg-[#faf6ec] p-8 flex flex-col sm:flex-row items-center gap-8">
+        <img
+          src="/images/reklamblad-preview.jpg"
+          alt={sv ? "Reklamblad för Mikkeller Running Club Malmös klubbshop" : "Flyer for the Mikkeller Running Club Malmö club shop"}
+          width="600"
+          height="849"
+          class="w-40 h-auto rounded-lg border border-[#ddd0b6] shadow-sm shrink-0"
+          loading="lazy"
+        />
+        <div class="flex-1 min-w-0 text-center sm:text-left">
+          <p class="text-[#5a5a70] text-sm leading-relaxed mb-5 max-w-xl">
+            {sv
+              ? "Skriv ut och sätt upp i lokaler, på krogen eller dela digitalt. QR-koden leder till vår klubbshop hos Netshirt, där du kan handla officiella MRC-kläder."
+              : "Print it and put it up at venues and pubs, or share it digitally. The QR code leads to our club shop at Netshirt, where you can buy official MRC apparel."}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
+            <a
+              href={FLYER_URL}
+              download="Reklamblad-Mikkeller-Running-Club-2026.pdf"
+              class="inline-flex items-center justify-center gap-3 bg-[#882c29] hover:bg-[#6f231f] text-white font-bold px-6 py-3.5 rounded-lg transition-colors text-sm whitespace-nowrap"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              {sv ? "Ladda ner PDF" : "Download PDF"}
+            </a>
+            <a
+              href={SHOP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 border border-[#ddd0b6] hover:border-[#357c4f]/60 font-bold px-6 py-3.5 rounded-lg transition-all text-sm whitespace-nowrap"
+            >
+              {sv ? "Till klubbshopen" : "Go to the club shop"}
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
