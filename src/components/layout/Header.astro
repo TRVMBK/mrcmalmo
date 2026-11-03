@@ -1,6 +1,7 @@
 ---
 import { getAlternateUrlMapped, getLocalizedPath } from "@i18n/index";
 import type { Lang } from "@i18n/index";
+import { SHOP_URL } from "../../data/shop";
 
 interface Props {
   lang: Lang;
@@ -25,6 +26,15 @@ const altUrl = getAlternateUrlMapped(Astro.url, altLang);
 
     <!-- Right side -->
     <div class="flex items-center gap-3">
+      <a
+        href={SHOP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:block text-sm text-[#0f0f54]/60 hover:text-[#882c29] transition-colors font-medium"
+      >
+        {sv ? "Klubbshop" : "Club shop"}
+      </a>
+
       <a
         href={getLocalizedPath(lang, "/logotyp")}
         class="hidden sm:block text-sm text-[#0f0f54]/60 hover:text-[#882c29] transition-colors font-medium"
@@ -64,6 +74,9 @@ const altUrl = getAlternateUrlMapped(Astro.url, altLang);
 
   <div id="mobile-menu" class="hidden sm:hidden border-t border-[#ddd0b6] bg-[#eee5d2]">
     <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3">
+      <a href={SHOP_URL} target="_blank" rel="noopener noreferrer" class="text-[#0f0f54]/70 hover:text-[#882c29] transition-colors font-medium py-1 text-sm">
+        {sv ? "Klubbshop" : "Club shop"}
+      </a>
       <a href={getLocalizedPath(lang, "/logotyp")} class="text-[#0f0f54]/70 hover:text-[#882c29] transition-colors font-medium py-1 text-sm">
         {sv ? "Logotyp" : "Logo"}
       </a>
